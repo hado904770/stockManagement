@@ -8,11 +8,11 @@ import com.doan.stockmanagement.entity.dto.ProductDTO;
 
 public interface ProductService {
 
-    ResponseApi<List<Product>> findAllProduct();
+    ResponseApi<List<ProductDTO>> findAllProduct();
 
-    ResponseApi<Product> insertProduct(Product product);
+    ResponseApi<ProductDTO> insertProduct(Product product);
 
-    ResponseApi<Product> updateProduct(Product product);
+    ResponseApi<ProductDTO> updateProduct(Product product);
 
     ResponseApi<Object> deleteProduct(Integer id);
 

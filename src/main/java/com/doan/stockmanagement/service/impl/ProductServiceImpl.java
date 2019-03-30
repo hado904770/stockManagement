@@ -33,14 +33,14 @@ public class ProductServiceImpl implements ProductService {
     private static Logger LOGGER = LoggerFactory.getLogger(ProductServiceImpl.class);
 
     @Override
-    public ResponseApi<List<Product>> findAllProduct() {
+    public ResponseApi<List<ProductDTO>> findAllProduct() {
 
-        ResponseApi<List<Product>> responseApi = new ResponseApi<>();
+        ResponseApi<List<ProductDTO>> responseApi = new ResponseApi<>();
 
         try {
-            List<Product> products = productRepository.findAll();
+            List<ProductDTO> productDTOs = productMapper.toFindAllProductDTO(productRepository.findAll());
             responseApi = CommonUtils.buildResponseApi(HttpStatus.OK.value(), HttpStatus.OK.name(),
-                    products);
+                    productDTOs);
         } catch (Exception e) {
             LOGGER.error("ERROR GET LIST PRODUCT: ", e);
             responseApi = CommonUtils.buildResponseApi(HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.name(),
@@ -51,51 +51,51 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ResponseApi<Product> insertProduct(Product product) {
+    public ResponseApi<ProductDTO> insertProduct(Product product) {
 
-        ResponseApi<Product> responseApi = new ResponseApi<>();
+        ResponseApi<ProductDTO> responseApi = new ResponseApi<>();
 
         try {
             ProductStatus productStatus = new ProductStatus();
             productStatus.setStatus(Status.INPUT_WAREHOUSE);
-            //productStatus.setProduct(product);
+            productStatus.setProduct(product);
             
             product.setProductStatus(productStatus);
-            productRepository.save(product);
+            ProductDTO productDTO = productMapper.productToProductDTO(productRepository.save(product));
             
             responseApi = CommonUtils.buildResponseApi(HttpStatus.OK.value(), HttpStatus.OK.name(),
-                    null);
+                    productDTO);
         } catch (DataIntegrityViolationException e) {
             LOGGER.error("ERROR INSET OR UPDATE Integrity Violation Product: ", e);
             responseApi = CommonUtils.buildResponseApi(HttpStatus.CONFLICT.value(), HttpStatus.CONFLICT.name(),
-                    new Product());
+                    new ProductDTO());
         } catch (Exception e) {
             LOGGER.error("ERROR INSET OR UPDATE Product: ", e);
             responseApi = CommonUtils.buildResponseApi(HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.name(),
-                    new Product());
+                    new ProductDTO());
         }
 
         return responseApi;
     }
     
     @Override
-    public ResponseApi<Product> updateProduct(Product product) {
+    public ResponseApi<ProductDTO> updateProduct(Product product) {
 
-        ResponseApi<Product> responseApi = new ResponseApi<>();
+        ResponseApi<ProductDTO> responseApi = new ResponseApi<>();
 
         try {
-            productRepository.save(product);
+            ProductDTO productDTO = productMapper.productToProductDTO(productRepository.save(product));
             
             responseApi = CommonUtils.buildResponseApi(HttpStatus.OK.value(), HttpStatus.OK.name(),
-                    null);
+                    productDTO);
         } catch (DataIntegrityViolationException e) {
             LOGGER.error("ERROR INSET OR UPDATE Integrity Violation Product: ", e);
             responseApi = CommonUtils.buildResponseApi(HttpStatus.CONFLICT.value(), HttpStatus.CONFLICT.name(),
-                    new Product());
+                    new ProductDTO());
         } catch (Exception e) {
             LOGGER.error("ERROR INSET OR UPDATE Product: ", e);
             responseApi = CommonUtils.buildResponseApi(HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.name(),
-                    new Product());
+                    new ProductDTO());
         }
 
         return responseApi;

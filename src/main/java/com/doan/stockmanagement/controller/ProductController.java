@@ -16,23 +16,28 @@ import com.doan.stockmanagement.service.ProductService;
 @RestController
 @RequestMapping(value = "/product")
 public class ProductController {
-    
+
     @Autowired
     private ProductService productService;
-    
+
     @PostMapping("/filter")
-    public ResponseApi<List<Product>> getProductAll() {
+    public ResponseApi<List<ProductDTO>> getProductAll() {
         return productService.findAllProduct();
     }
-    
+
     @PostMapping("/insert")
-    public ResponseApi<Product> saveProduct(@RequestBody Product product) {
+    public ResponseApi<ProductDTO> insertProduct(@RequestBody Product product) {
         return productService.insertProduct(product);
     }
-    
+
+    @PostMapping("/update")
+    public ResponseApi<ProductDTO> updateProduct(@RequestBody Product product) {
+        return productService.updateProduct(product);
+    }
+
     @PostMapping("/delete")
     public ResponseApi<Object> deleteProduct(@RequestBody Product product) {
         return productService.deleteProduct(product.getId());
     }
-    
+
 }
