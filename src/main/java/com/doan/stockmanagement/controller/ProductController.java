@@ -21,7 +21,7 @@ public class ProductController {
     private ProductService productService;
     
     @PostMapping("/filter")
-    public ResponseApi<List<ProductDTO>> getProductAll() {
+    public ResponseApi<List<Product>> getProductAll() {
         return productService.findAllProduct();
     }
     

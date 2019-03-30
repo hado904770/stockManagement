@@ -1,6 +1,7 @@
 package com.doan.stockmanagement.entity.dto;
 
 import com.doan.stockmanagement.enums.Status;
+import com.doan.stockmanagement.enums.StatusDTO;
 
 import lombok.Data;
 

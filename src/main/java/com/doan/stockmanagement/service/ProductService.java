@@ -8,7 +8,7 @@ import com.doan.stockmanagement.entity.dto.ProductDTO;
 
 public interface ProductService {
 
-    ResponseApi<List<ProductDTO>> findAllProduct();
+    ResponseApi<List<Product>> findAllProduct();
 
     ResponseApi<Product> insertProduct(Product product);
 

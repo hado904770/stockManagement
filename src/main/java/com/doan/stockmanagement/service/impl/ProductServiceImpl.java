@@ -33,14 +33,14 @@ public class ProductServiceImpl implements ProductService {
     private static Logger LOGGER = LoggerFactory.getLogger(ProductServiceImpl.class);
 
     @Override
-    public ResponseApi<List<ProductDTO>> findAllProduct() {
+    public ResponseApi<List<Product>> findAllProduct() {
 
-        ResponseApi<List<ProductDTO>> responseApi = new ResponseApi<>();
+        ResponseApi<List<Product>> responseApi = new ResponseApi<>();
 
         try {
-            List<ProductDTO> productDTOs = productMapper.toFindAllProductDTO(productRepository.findAll());
+            List<Product> products = productRepository.findAll();
             responseApi = CommonUtils.buildResponseApi(HttpStatus.OK.value(), HttpStatus.OK.name(),
-                    productDTOs);
+                    products);
         } catch (Exception e) {
             LOGGER.error("ERROR GET LIST PRODUCT: ", e);
             responseApi = CommonUtils.buildResponseApi(HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.name(),
