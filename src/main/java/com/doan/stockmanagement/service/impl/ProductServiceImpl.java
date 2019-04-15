@@ -55,25 +55,25 @@ public class ProductServiceImpl implements ProductService {
 
         ResponseApi<ProductDTO> responseApi = new ResponseApi<>();
 
-        try {
-            ProductStatus productStatus = new ProductStatus();
-            productStatus.setStatus(Status.INPUT_WAREHOUSE);
-            productStatus.setProduct(product);
-            
-            product.setProductStatus(productStatus);
-            ProductDTO productDTO = productMapper.productToProductDTO(productRepository.save(product));
-            
-            responseApi = CommonUtils.buildResponseApi(HttpStatus.OK.value(), HttpStatus.OK.name(),
-                    productDTO);
-        } catch (DataIntegrityViolationException e) {
-            LOGGER.error("ERROR INSET OR UPDATE Integrity Violation Product: ", e);
-            responseApi = CommonUtils.buildResponseApi(HttpStatus.CONFLICT.value(), HttpStatus.CONFLICT.name(),
-                    new ProductDTO());
-        } catch (Exception e) {
-            LOGGER.error("ERROR INSET OR UPDATE Product: ", e);
-            responseApi = CommonUtils.buildResponseApi(HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.name(),
-                    new ProductDTO());
-        }
+//        try {
+//            ProductStatus productStatus = new ProductStatus();
+//            productStatus.setStatus(Status.INPUT_WAREHOUSE);
+//            productStatus.setProduct(product);
+//            
+//            product.setProductStatus(productStatus);
+//            ProductDTO productDTO = productMapper.productToProductDTO(productRepository.save(product));
+//            
+//            responseApi = CommonUtils.buildResponseApi(HttpStatus.OK.value(), HttpStatus.OK.name(),
+//                    productDTO);
+//        } catch (DataIntegrityViolationException e) {
+//            LOGGER.error("ERROR INSET OR UPDATE Integrity Violation Product: ", e);
+//            responseApi = CommonUtils.buildResponseApi(HttpStatus.CONFLICT.value(), HttpStatus.CONFLICT.name(),
+//                    new ProductDTO());
+//        } catch (Exception e) {
+//            LOGGER.error("ERROR INSET OR UPDATE Product: ", e);
+//            responseApi = CommonUtils.buildResponseApi(HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.name(),
+//                    new ProductDTO());
+//        }
 
         return responseApi;
     }
