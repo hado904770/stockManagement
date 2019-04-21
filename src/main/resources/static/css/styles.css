@@ -10,7 +10,7 @@ body {
 
 #navigation a.nav-link {
     color: #fff;
-    padding: 1.5rem;
+    padding: 1rem;
 }
 
 #navigation a.nav-link:hover {
@@ -19,8 +19,13 @@ body {
     color: #000;
 }
 
+#navigation a.activated {
+    background-color: #4CAF50;
+    color: #fff;
+}
+
 #navigation .navbar-brand {
-    font-size: 2rem;
+    font-size: 1.5rem;
 }
 
 

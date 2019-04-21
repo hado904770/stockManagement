@@ -1,0 +1,1 @@
+console.log("GOODS RECEIPT NOTE JS");

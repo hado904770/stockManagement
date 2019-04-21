@@ -1,0 +1,1 @@
+console.log("GOODS DELIVERY NOTE JS");

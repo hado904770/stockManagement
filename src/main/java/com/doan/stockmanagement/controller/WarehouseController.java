@@ -24,12 +24,12 @@ public class WarehouseController {
     public ResponseApi<List<Warehouse>> getWarehouse() {
         return warehouseService.getWarehouse();
     }
-    
+
     @PostMapping(value = CommonConstants.REQUEST_SAVE)
     public ResponseApi<Warehouse> saveWarehouse(@RequestBody Warehouse warehouse) {
         return warehouseService.saveWarehouse(warehouse);
     }
-    
+
     @PostMapping(value = CommonConstants.REQUEST_DELETE)
     public ResponseApi<Object> deleteWarehouse(@RequestBody Warehouse warehouse) {
         return warehouseService.deleteWarehouse(warehouse.getId());

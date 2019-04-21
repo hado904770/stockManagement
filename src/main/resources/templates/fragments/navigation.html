@@ -1,56 +1,49 @@
 <div class="navbar navbar-expand-lg bg-primary navbar-dark px-5 py-0">
-    <a class="navbar-brand" th:href="@{/}">quản lý kho hàng</a>
+    <a class="navbar-brand" th:href="@{${DOMAIN_INIT}}">quản lý kho hàng</a>
 
     <ul class="navbar-nav ml-auto">
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
-                sản phẩm
-            </a>
-            <div class="dropdown-menu dropdown_alerts">
-                <a class="dropdown-item" href="#">
-                    nhập sản phẩm
-                </a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">
-                   danh sách sản phẩm
-                </a>
-            </div>
-        </li>
         
         <li class="nav-item">
-            <a class="nav-link" th:href="@{/warehouse}">
+            <a th:class="${PATH_ACTION eq DOMAIN_WAREHOUSE} ? 'nav-link activated':'nav-link'"
+            th:href="@{${DOMAIN_WAREHOUSE}}">
                 kho hàng
             </a>
         </li>
 
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+        <li class="nav-item">
+            <a th:class="${PATH_ACTION eq DOMAIN_PROVIDER} ? 'nav-link activated':'nav-link'"
+            th:href="@{${DOMAIN_PROVIDER}}">
                 nhà cung cấp
             </a>
-            <div class="dropdown-menu dropdown_alerts">
-                <a class="dropdown-item" href="#">
-                    nhập nhà cung cấp
-                </a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">
-                   danh sách nhà cung cấp
-                </a>
-            </div>
         </li>
 
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+        <li class="nav-item">
+            <a th:class="${PATH_ACTION eq DOMAIN_CUSTOMER} ? 'nav-link activated':'nav-link'"
+            th:href="@{${DOMAIN_CUSTOMER}}">
                 khách hàng
             </a>
-            <div class="dropdown-menu dropdown_alerts">
-                <a class="dropdown-item" href="#">
-                    nhập khách hàng
-                </a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">
-                   danh sách khách hàng
-                </a>
-            </div>
         </li>
+
+        <li class="nav-item">
+            <a th:class="${PATH_ACTION eq DOMAIN_PRODUCT} ? 'nav-link activated':'nav-link'"
+            th:href="@{${DOMAIN_PRODUCT}}">
+                sản phẩm
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a th:class="${PATH_ACTION eq GOODS_RECEIPT_NOTE} ? 'nav-link activated':'nav-link'"
+            th:href="@{${DOMAIN_GOODS_RECEIPT_NOTE}}">
+                phiếu nhận hàng
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a th:class="${PATH_ACTION eq GOODS_DELIVERY_NOTE} ? 'nav-link activated':'nav-link'"
+            th:href="@{${DOMAIN_GOODS_DELIVERY_NOTE}}">
+                phiếu giao hàng
+            </a>
+        </li>
+        
     </ul>
 </div>

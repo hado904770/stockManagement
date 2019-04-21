@@ -7,8 +7,15 @@
 
 <body 
 th:with="
+DOMAIN_INIT=${T(com.doan.stockmanagement.common.CommonConstants).DOMAIN_INIT},
 DOMAIN_WAREHOUSE=${T(com.doan.stockmanagement.common.CommonConstants).DOMAIN_WAREHOUSE},
-REQUEST_GET_ALL=${T(com.doan.stockmanagement.common.CommonConstants).REQUEST_GET_ALL}
+DOMAIN_PROVIDER=${T(com.doan.stockmanagement.common.CommonConstants).DOMAIN_PROVIDER},
+DOMAIN_CUSTOMER=${T(com.doan.stockmanagement.common.CommonConstants).DOMAIN_CUSTOMER},
+DOMAIN_PRODUCT=${T(com.doan.stockmanagement.common.CommonConstants).DOMAIN_PRODUCT},
+DOMAIN_GOODS_RECEIPT_NOTE=${T(com.doan.stockmanagement.common.CommonConstants).DOMAIN_GOODS_RECEIPT_NOTE},
+DOMAIN_GOODS_DELIVERY_NOTE=${T(com.doan.stockmanagement.common.CommonConstants).DOMAIN_GOODS_DELIVERY_NOTE},
+GOODS_RECEIPT_NOTE=${T(com.doan.stockmanagement.common.CommonConstants).GOODS_RECEIPT_NOTE},
+GOODS_DELIVERY_NOTE=${T(com.doan.stockmanagement.common.CommonConstants).GOODS_DELIVERY_NOTE}
 ">
 
 <div id="navigation" class="text-uppercase">
