@@ -1,8 +1,10 @@
 package com.doan.stockmanagement.common;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Setter
+@Getter
 public class ResponseApi <T> {
     
     private int status;

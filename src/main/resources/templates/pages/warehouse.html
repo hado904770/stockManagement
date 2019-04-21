@@ -8,9 +8,22 @@
 
 <th:block layout:fragment="content">
 
-    <div class="card">
+    <div class="card text-body">
         <div class="card-header text-uppercase">
-            danh sách các nhà kho
+			<div class="clearfix">
+				<span class="float-left">
+					danh sách các nhà kho
+				</span>
+				<span class="float-right">
+					<button type="button" class="btn btn-primary btn-sm"
+                        data-toggle="modal" data-target="#add_warehouse">
+                            <strong>
+								<i class="fa fa-plus"></i>
+								&nbsp;thêm kho hàng
+							</strong>
+                    </button>
+				</span>
+			</div>
         </div>
 
         <div class="card-body">
@@ -20,33 +33,120 @@
     </div>
 
     <div id="tplWarehouses" class="d-none">
-		
-			<table class="table table-bordered">
-				
-				<thead>
-					<tr>
-						<th>ID</th>
-						<th>NAME</th>
-						<th>CREATED TIME</th>
-						<th>UPDATED TIME</th>
-					</tr>
-				</thead>
-				
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>NAME</th>
+					<th>CREATED TIME</th>
+					<th>UPDATED TIME</th>
+				</tr>
+			</thead>
+			
+			<tbody>
+				<!-- {{#results}} -->
+				<tr>
+					<td>{{id}}</td>
+					<td>{{name}}</td>
+					<td>{{createdTime}}</td>
+					<td>{{updatedTime}}</td>
+				</tr>
+				<!-- {{/results}} -->
+
+				<!-- {{^results}} -->
+				<tr>
+					<td colspan="4">Empty</td>
+				</tr>
+				<!-- {{/results}} -->
+			</tbody>
+			
+		</table>
+	</div>
+	
+	<!-- The Modal -->
+	<div class="modal fade" id="add_warehouse">
+		<div class="modal-dialog">
+		  <div class="modal-content">
+	  
+			<!-- Modal Header -->
+			<div class="modal-header">
+			  <h6 class="modal-title">
+				<strong>Prescription -- <span class="active_record">{{ hashActive }}</span></strong><br>
+				<ng-container *ngIf="interity === 1">
+				  <span class="badge badge-success">Interity data</span>
+				</ng-container>
+	  
+				<ng-container *ngIf="interity === 2">
+				  <span class="badge badge-warning">No interity data</span>
+				</ng-container>
+			  </h6>
+	  
+			  <button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+	  
+			<!-- Modal body -->
+			<div class="modal-body">
+			  <table class="table table-bordered">
 				<tbody>
-					<!-- {{#results}} -->
+				  <tr>
+					<td><strong>Doctor</strong></td>
+					<td>
+					  <div style="color:#007bff;">{{ addDoctor }}</div>
+					</td>
+				  </tr>
+	  
+				  <ng-container *ngIf="grantRightR === 1">
 					<tr>
-						<td>{{id}}</td>
-						<td>{{name}}</td>
-						<td>{{createdTime}}</td>
-						<td>{{updatedTime}}</td>
+					  <td colspan="2">
+						<div class="alert alert-success">
+						  <strong>Success!</strong>
+						</div>
+					  </td>
 					</tr>
-					<!-- {{/results}} -->
+				  </ng-container>
+				  <ng-container *ngIf="grantRightR === 2">
+					<tr>
+					  <td colspan="2">
+						<div class="alert alert-danger">
+						  <strong>Fail!</strong>
+						</div>
+					  </td>
+					</tr>
+				  </ng-container>
+				  <tr>
+					<td colspan="2">
+					  <form (ngSubmit)="patientGrantRightDoctorR(ngFormGrantRightDoctor)" #ngFormGrantRightDoctor="ngForm">
+						<div class="form-group">
+						  <div class="form-check-inline">
+							<label class="form-check-label">
+							  <input type="radio" class="form-check-input" value="1day" ngModel name="duration">1
+							  day
+							</label>
+						  </div>
+						  <div class="form-check-inline">
+							<label class="form-check-label">
+							  <input type="radio" class="form-check-input" value="1month" ngModel name="duration">1
+							  month
+							</label>
+						  </div>
+						  <div class="form-check-inline">
+							<label class="form-check-label">
+							  <input type="radio" class="form-check-input" value="1year" ngModel name="duration">1
+							  year
+							</label>
+						  </div>
+						</div>
+	  
+						<button class="btn btn-info mr-3">Grant right</button>
+					  </form>
+					</td>
+				  </tr>
 				</tbody>
-				
-			</table>
+			  </table>
+			</div>
+		  </div>
 		</div>
-	
-	
+	  </div>
 
 </th:block>
 

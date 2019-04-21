@@ -8,6 +8,16 @@ body {
   line-height: 1;
 }
 
+button {
+  text-transform: uppercase!important;
+  font-size: inherit!important;
+}
+
+.btn {
+  box-shadow: none!important;
+  outline: none!important;
+}
+
 #navigation a.nav-link {
     color: #fff;
     padding: 1rem;
@@ -53,6 +63,7 @@ body {
 #navigation .dropdown_alerts {
     margin-left: auto;
 }
+
 
 
 /********************************************/

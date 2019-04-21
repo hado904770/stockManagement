@@ -20,7 +20,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @MappedSuperclass
-public class CommonEntity {
+public abstract class CommonEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
