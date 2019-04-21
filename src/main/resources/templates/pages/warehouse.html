@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:with="http://www.thymeleaf.org/extras/with"
+      layout:decorate="~{layout}"
+      with:title="'Warehouse'">
+
+<th:block layout:fragment="content">
+
+    <div class="card">
+        <div class="card-header text-uppercase">
+            danh sách các nhà kho
+        </div>
+        <div class="card-body">
+
+
+        [[ ${DOMAIN_WAREHOUSE} ]] <br>
+        [[ ${REQUEST_GET_ALL} ]]
+
+        </div>
+    </div>
+
+</th:block>
+
+</html>

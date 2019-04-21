@@ -5,11 +5,19 @@
 
 <th:block layout:insert="~{fragments/htmlhead}"/>
 
-<body>
+<body 
+th:with="
+DOMAIN_WAREHOUSE=${T(com.doan.stockmanagement.common.CommonConstants).DOMAIN_WAREHOUSE},
+REQUEST_GET_ALL=${T(com.doan.stockmanagement.common.CommonConstants).REQUEST_GET_ALL}
+">
+
 <div id="navigation" class="text-uppercase">
 <th:block layout:insert="~{fragments/navigation}"/>
 </div>
 
+<div class="px-5 py-5">
+    <th:block layout:fragment="content"/>         
+</div>
 
 </body>
 
