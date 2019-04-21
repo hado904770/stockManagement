@@ -1,11 +1,12 @@
 package com.doan.stockmanagement.common;
 
+
 public class CommonUtils {
 
-    public static <T> ResponseApi<T> buildResponseApi(int statusCode, String message, T results) {
+    public static <T> ResponseApi<T> buildResponse(int status, String message, T results) {
 
-        ResponseApi<T> responseApi = new ResponseApi<T>();
-        responseApi.setStatusCode(statusCode);
+        ResponseApi<T> responseApi = new ResponseApi<>();
+        responseApi. setStatus(status);
         responseApi.setMessage(message);
         responseApi.setResults(results);
 

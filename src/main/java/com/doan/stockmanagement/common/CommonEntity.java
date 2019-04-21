@@ -20,7 +20,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @MappedSuperclass
-public abstract class CommonEntity {
+public class CommonEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,11 +30,11 @@ public abstract class CommonEntity {
     @CreationTimestamp
     @JsonFormat(shape = Shape.STRING, pattern = "dd/MM/yyyy")
     @Column(name = "CREATED_TIME")
-    private LocalDate created;
+    private LocalDate createdTime;
 
     @UpdateTimestamp
     @JsonFormat(shape = Shape.STRING, pattern = "dd/MM/yyyy")
     @Column(name = "UPDATED_TIME")
-    private LocalDate updated;
+    private LocalDate updatedTime;
 
 }

@@ -25,11 +25,11 @@ public class WareHouseServiceImpl implements WarehouseService {
         ResponseApi<List<Warehouse>> responseApi = new ResponseApi<>();
 
         try {
-            responseApi = CommonUtils.buildResponseApi(HttpStatus.OK.value(),
+            responseApi = CommonUtils.buildResponse(HttpStatus.OK.value(),
                     HttpStatus.OK.name(),
                     warehouseRepository.findAll());
         } catch (Exception e) {
-            responseApi = CommonUtils.buildResponseApi(HttpStatus.BAD_REQUEST.value(),
+            responseApi = CommonUtils.buildResponse(HttpStatus.BAD_REQUEST.value(),
                     e.getMessage(),
                     new ArrayList<>());
         }
@@ -43,11 +43,11 @@ public class WareHouseServiceImpl implements WarehouseService {
         ResponseApi<Warehouse> responseApi = new ResponseApi<>();
 
         try {
-            responseApi = CommonUtils.buildResponseApi(HttpStatus.OK.value(),
+            responseApi = CommonUtils.buildResponse(HttpStatus.OK.value(),
                     HttpStatus.OK.name(),
                     warehouseRepository.save(warehouse));
         } catch (Exception e) {
-            responseApi = CommonUtils.buildResponseApi(HttpStatus.BAD_REQUEST.value(),
+            responseApi = CommonUtils.buildResponse(HttpStatus.BAD_REQUEST.value(),
                     e.getMessage(),
                     new Warehouse());
         }
@@ -62,11 +62,11 @@ public class WareHouseServiceImpl implements WarehouseService {
 
         try {
             warehouseRepository.deleteById(id);
-            responseApi = CommonUtils.buildResponseApi(HttpStatus.OK.value(),
+            responseApi = CommonUtils.buildResponse(HttpStatus.OK.value(),
                     HttpStatus.OK.name(),
                     null);
         } catch (Exception e) {
-            responseApi = CommonUtils.buildResponseApi(HttpStatus.BAD_REQUEST.value(),
+            responseApi = CommonUtils.buildResponse(HttpStatus.BAD_REQUEST.value(),
                     e.getMessage(),
                     null);
         }

@@ -14,14 +14,39 @@
         </div>
 
         <div class="card-body">
-
-
-        [[ ${DOMAIN_WAREHOUSE} ]] <br>
-        [[ ${REQUEST_GET_ALL} ]] <br>
-        [[ ${PATH_ACTION} ]]
-
+            <div id="warehouses"></div>
+            <div class="text-danger" id="error"></div>
         </div>
     </div>
+
+    <div id="tplWarehouses" class="d-none">
+		
+			<table class="table table-bordered">
+				
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>NAME</th>
+						<th>CREATED TIME</th>
+						<th>UPDATED TIME</th>
+					</tr>
+				</thead>
+				
+				<tbody>
+					<!-- {{#results}} -->
+					<tr>
+						<td>{{id}}</td>
+						<td>{{name}}</td>
+						<td>{{createdTime}}</td>
+						<td>{{updatedTime}}</td>
+					</tr>
+					<!-- {{/results}} -->
+				</tbody>
+				
+			</table>
+		</div>
+	
+	
 
 </th:block>
 
