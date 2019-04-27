@@ -1,4 +1,4 @@
-package com.doan.stockmanagement.controller;
+package com.doan.stockmanagement.controller.api;
 
 import java.util.List;
 

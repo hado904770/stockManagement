@@ -1,4 +1,4 @@
-package com.doan.stockmanagement.controller;
+package com.doan.stockmanagement.controller.ui;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

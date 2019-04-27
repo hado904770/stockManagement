@@ -74,4 +74,22 @@ public class WareHouseServiceImpl implements WarehouseService {
         return responseApi;
     }
 
+    @Override
+    public ResponseApi<Warehouse> getWarehouseById(Integer id) {
+        
+        ResponseApi<Warehouse> responseApi = new ResponseApi<>();
+
+        try {
+            responseApi = CommonUtils.buildResponse(HttpStatus.OK.value(),
+                    HttpStatus.OK.name(),
+                    warehouseRepository.findById(id).get());
+        } catch (Exception e) {
+            responseApi = CommonUtils.buildResponse(HttpStatus.BAD_REQUEST.value(),
+                    e.getMessage(),
+                    new Warehouse());
+        }
+
+        return responseApi;
+    }
+
 }

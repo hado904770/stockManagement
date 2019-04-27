@@ -5,6 +5,7 @@ $(document).ready(function() {
     $(function() {
 		getWarehouse();
 		insert();
+		blockAddWarehouse();
 	});
 
     function getWarehouse() {
@@ -20,19 +21,21 @@ $(document).ready(function() {
 				$("#loading").html(LOAD_WAITING);
 			},
 			success: function(res) {
-                //console.log(res);
                 $("#loading").html('');
 				
                 if (res.status != 200) {
+					$("button[data-target='#add_warehouse']").addClass("d-none");
                     $("#error_get_all").text(res.message);
                 } else {
                     let template = $("#tplWarehouses").html();
                     let html = Mustache.to_html(template, res);
-                    $("#warehouses").html(html);
+					$("#warehouses").html(html);
+					$("button[data-target='#add_warehouse']").removeClass("d-none");
                 }
 			},
 			error: function(e) {
-                $("#loading").html('');
+				$("#loading").html('');
+				$("button[data-target='#add_warehouse']").addClass("d-none");
                 $("#error_get_all").text(e.responseText);
 			}
 		});
@@ -56,23 +59,60 @@ $(document).ready(function() {
 					$("#loading").html(LOAD_WAITING);
 				},
 				success: function(res) {
-					//console.log(res);
 					$("#loading").html('');
 					
 					if (res.status != 200) {
-						$("#error_save").text(res.message);
+						blockDanger();
+						$("#add_warehouse #error_save").text(res.message);
 					} else {
 						getWarehouse();
-						//let template = $("#tplWarehouses").html();
-						//let html = Mustache.to_html(template, res);
-						//$("#warehouses").html(html);
+						blockSuccess();
+						$("#add_warehouse").find("input[name=name]").val('');
 					}
 				},
 				error: function(e) {
 					$("#loading").html('');
-					$("#error_save").text(e.responseText);
+					blockDanger();
+					$("#add_warehouse #error_save").text(e.message);
 				}
 			});
+		});
+	}
+
+	function blockAddWarehouse() {
+		$("button[data-target='#add_warehouse']").click(function(e) {
+			noneSuccess();
+			noneDanger();
+		});
+	}
+
+	function blockSuccess() {
+		let successWarehouse = $("#success_warehouse");
+		successWarehouse.removeClass("d-none").addClass("d-block");
+	}
+
+	function blockDanger() {
+		let dangerWarehouse = $("#danger_warehouse");
+		dangerWarehouse.removeClass("d-none").addClass("d-block");
+	}
+
+	function noneSuccess() {
+		let successWarehouse = $("#success_warehouse");
+		successWarehouse.removeClass("d-block").addClass("d-none");
+	}
+
+	function noneDanger() {
+		let dangerWarehouse = $("#danger_warehouse");
+		dangerWarehouse.removeClass("d-block").addClass("d-none");
+	}
+
+	function blockEditWarehouse() {
+		$("button[data-target='#edit_warehouse']").click(function(e) {
+			noneSuccess();
+			noneDanger();
+			e.preventDefault();
+
+			
 		});
 	}
 });
