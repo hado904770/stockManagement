@@ -27,8 +27,9 @@
         </div>
 
         <div class="card-body">
+						<div id="loading"></div>
             <div id="warehouses"></div>
-            <div class="text-danger" id="error"></div>
+            <div class="text-danger" id="error_get_all"></div>
         </div>
     </div>
 
@@ -67,37 +68,36 @@
 	<div class="modal fade" id="add_warehouse">
 		<div class="modal-dialog">
 		  <div class="modal-content">
-	  
-			<!-- Modal Header -->
-			<div class="modal-header">
-			  <h6 class="modal-title text-uppercase">
-					<strong>kho hàng</strong>
-			  </h6>
-	  
-			  <button type="button" class="close" data-dismiss="modal">&times;</button>
-			</div>
-	  
-			<!-- Modal body -->
-			<div class="modal-body">
-			  <table class="table table-bordered">
-				<tbody>
-				  <tr>
-						<td colspan="2">
-							<form>
-								<div class="form-group">
-									<input type="text" class="form-control" placeholder="Tên kho hàng" name="name">
-								</div>
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h6 class="modal-title text-uppercase">
+						<strong>kho hàng</strong>
+					</h6>
 			
-								<button class="btn btn-info mr-3">thêm</button>
-							</form>
-						</td>
-				  </tr>
-				</tbody>
-			  </table>
-			</div>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+	  
+				<!-- Modal body -->
+				<div class="modal-body">
+					<table class="table table-bordered">
+						<tbody>
+							<tr>
+								<td colspan="2">
+									<form>
+										<div class="form-group">
+											<input type="text" class="form-control" placeholder="Tên kho hàng" name="name">
+										</div>
+					
+										<button class="btn btn-info mr-3 button_add">thêm</button>
+									</form>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 		  </div>
 		</div>
-	  </div>
+	</div>
 
 </th:block>
 
