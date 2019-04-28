@@ -36,9 +36,9 @@ public class WarehouseController {
         return warehouseService.saveWarehouse(warehouse);
     }
 
-    @PostMapping(value = CommonConstants.REQUEST_DELETE)
-    public ResponseApi<Object> deleteWarehouse(@RequestBody Warehouse warehouse) {
-        return warehouseService.deleteWarehouse(warehouse.getId());
+    @PostMapping(value = CommonConstants.REQUEST_DELETE + "/{id}")
+    public ResponseApi<Object> deleteWarehouse(@PathVariable(name = "id") Integer id) {
+        return warehouseService.deleteWarehouse(id);
     }
 
 }
