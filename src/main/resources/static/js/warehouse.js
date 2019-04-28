@@ -5,10 +5,12 @@ $(document).ready(function() {
     $(function() {
 
 		getWarehouse();
-		insert();
+		insertWarehouse();
 		blockAddWarehouse();
 		blockEditWarehouse();
-		update();
+		updateWarehouse();
+		blockDeleteWarehouse();
+		deleteWarehouse();
 
 	});
 
@@ -45,7 +47,7 @@ $(document).ready(function() {
 		});
 	}
 	
-	function insert() {
+	function insertWarehouse() {
 		$('#add_warehouse').on(`click`, `button`, function(e) {
 			e.preventDefault();
 			let elAdd = $(`#add_warehouse`);
@@ -83,7 +85,7 @@ $(document).ready(function() {
 						.html(``);
 
 						elAdd.find(`#success_warehouse`).removeClass(`d-none`).addClass(`d-block`).html(suc);
-						$(`#add_warehouse`).find(`input[name=name]`).val('');
+						elAdd.find(`input[name=name]`).val('');
 
 						getWarehouse();
 					}
@@ -176,7 +178,7 @@ $(document).ready(function() {
 		
 	}
 
-	function update() {
+	function updateWarehouse() {
 		$('#edit_warehouse').on(`click`, `button`, function(e) {
 			e.preventDefault();
 			let elEdit = $(`#edit_warehouse`);
@@ -185,6 +187,131 @@ $(document).ready(function() {
 			let name = elEdit.find(`input[name=name]`).val();
 			let createdTime = elEdit.find(`input[name=createdTime]`).val();
 			let updatedTime = elEdit.find(`input[name=updatedTime]`).val();
+
+			$.ajax({
+				type: `POST`,
+				url: DOMAIN_WAREHOUSE + REQUEST_SAVE,
+				contentType: `application/json`,
+				dataType: `json`,
+				data: JSON.stringify({
+					id: id,
+					name: name,
+					createdTime: createdTime,
+					updatedTime: updatedTime
+				}),
+				beforeSend: function() {
+					$(`#loading`).html(LOAD_WAITING);
+				},
+				success: function(res) {
+					$(`#loading`).html('');
+					
+					if (res.status != 200) {
+						let error = `<div class='alert alert-danger'>`;
+						error += `<strong>Thất bại!</strong> Cập nhật kho hàng thất bại!.<br>`;
+						error += `<div class="text-danger">`;
+						error += res.message
+						error +=`</div></div>`;
+
+						elEdit.find(`#danger_warehouse`).removeClass(`d-none`).addClass(`d-block`).html(error);
+					} else {
+						let suc = `<div class='alert alert-success'>
+							<strong>Thành công!</strong> Cập nhật kho hàng thành công!.
+						</div>`;
+
+						elEdit.find(`#danger_warehouse`)
+						.removeClass(`d-block`).addClass(`d-none`)
+						.html(``);
+
+						elEdit.find(`#success_warehouse`).removeClass(`d-none`).addClass(`d-block`).html(suc);
+						elEdit.find(`input[name=id]`).val(``);
+						elEdit.find(`input[name=name]`).val(``);
+						elEdit.find(`input[name=createdTime]`).val(``);
+						elEdit.find(`input[name=updatedTime]`).val(``);
+
+						getWarehouse();
+					}
+				},
+				error: function(e) {
+					$(`#loading`).html('');
+					let error = `<div class='alert alert-danger'>`;
+					error += `<strong>Thất bại!</strong> Thêm kho hàng thất bại!.<br>`;
+					error += `<div class="text-danger">`;
+					error += e.responseText;
+					error +=`</div></div>`;
+
+					elEdit.find(`#danger_warehouse`).removeClass(`d-none`).addClass(`d-block`).html(error);
+				}
+			});
+
+		});
+	}
+
+	function blockDeleteWarehouse() {
+		$(`#warehouses`).delegate(`button[data-target='#delete_warehouse']`, `click`, function(e) {
+			let id = $(this).closest(`tbody tr`).attr('row_id');
+			let elDel = $(`#delete_warehouse`);
+			elDel.find(`#danger_warehouse`).removeClass(`d-block`).addClass(`d-none`).html(``);
+			elDel.find(`#success_warehouse`).removeClass(`d-block`).addClass(`d-none`).html(``);
+
+			$(`#delete_warehouse button[id='btn_delete']`).attr("row_id", id);
+
+
+		});
+	}
+
+	function deleteWarehouse() {
+
+		$('#delete_warehouse').on(`click`, `button[id='btn_delete']`, function(e) {
+			let id = $(this).attr(`row_id`);
+			let elDel = $(`#delete_warehouse`);
+			e.preventDefault();
+
+			$.ajax({
+				type: `POST`,
+				url: DOMAIN_WAREHOUSE + REQUEST_DELETE + "/" + id,
+				contentType: `application/json`,
+				dataType: `json`,
+				data: JSON.stringify({
+					//No data
+				}),
+				beforeSend: function() {
+					$(`#loading`).html(LOAD_WAITING);
+				},
+				success: function(res) {
+					$(`#loading`).html('');
+					
+					if (res.status != 200) {
+						let error = `<div class='alert alert-danger'>`;
+						error += `<strong>Thất bại!</strong> Xóa kho hàng thất bại!<br>`;
+						error += `<div class="text-danger">`;
+						error += res.message
+						error +=`</div></div>`;
+
+						elDel.find(`#danger_warehouse`).removeClass(`d-none`).addClass(`d-block`).html(error);
+					} else {
+						let suc = `<div class='alert alert-success'>
+							<strong>Thành công!</strong> Xóa kho hàng thành công!
+						</div>`;
+
+						elDel.find(`#danger_warehouse`)
+						.removeClass(`d-block`).addClass(`d-none`)
+						.html(``);
+
+						elDel.find(`#success_warehouse`).removeClass(`d-none`).addClass(`d-block`).html(suc);
+						getWarehouse();
+					}
+				},
+				error: function(e) {
+					$(`#loading`).html('');
+					let error = `<div class='alert alert-danger'>`;
+					error += `<strong>Thất bại!</strong> Xóa kho hàng thất bại!.<br>`;
+					error += `<div class="text-danger">`;
+					error += e.responseText;
+					error +=`</div></div>`;
+
+					elDel.find(`#danger_warehouse`).removeClass(`d-none`).addClass(`d-block`).html(error);
+				}
+			});
 		});
 	}
 
