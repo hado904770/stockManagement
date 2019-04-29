@@ -17,6 +17,14 @@ tbody td {
     padding: 0.25rem;
 }
 
+thead .td_10 {
+  width: 10rem;
+}
+
+thead .td_12 {
+  width: 12rem;
+}
+
 .form-group .form-control {
     font-size: 18px;
     color: initial;

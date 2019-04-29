@@ -8,20 +8,235 @@
 
 <th:block layout:fragment="content">
 
-    <div class="card">
-        <div class="card-header text-uppercase">
-            danh sách các khách hành
-        </div>
+    <div class="card text-body">
+		<div class="card-header text-uppercase">
+			<div class="clearfix">
+				<span class="float-left">
+					danh sách các khách hàng
+				</span>
+				<span class="float-right">
+					<button type="button" class="btn btn-primary btn-sm"
+							data-toggle="modal" data-target="#add_customer">
+							<strong>
+								<i class="fa fa-plus"></i>
+								&nbsp;thêm khách hàng
+							</strong>
+					</button>
+				</span>
+			</div>
+		</div>
 
-        <div class="card-body">
+		<div class="card-body">
+				<div id="loading"></div>
+				<div id="customers"></div>
+				<div id="error_get_all" class="text-danger"></div>
+		</div>
+	</div>
 
+  <div id="tplCustomers" class="d-none">
+		<table class="table table-bordered">
+			<thead class="text-uppercase">
+				<tr>
+					<th>stt</th>
+                    <th>tên</th>
+                    <th>địa chỉ</th>
+					<th class="td_10">thời gian tạo</th>
+					<th class="td_10">thời gian sửa</th>
+					<th class="td_12">thao tác</th>
+				</tr>
+			</thead>
+			
+			<tbody>
+				<!-- {{#results}} -->
+				<tr row_id={{id}}>
+					<td>{{id}}</td>
+                    <td>{{name}}</td>
+                    <td>{{address}}</td>
+					<td>{{createdTime}}</td>
+					<td>{{updatedTime}}</td>
+					<td>
+						<button type="button" class="btn btn-info btn-sm"
+							data-toggle="modal" data-target="#edit_customer">
+              				<strong>
+								<i class="fa fa-pencil-square-o"></i>
+								&nbsp;sửa
+							</strong>
+						</button>
+					
+						<button type="button" class="btn btn-warning btn-sm"
+              			data-toggle="modal" data-target="#delete_customer">
+              				<strong>
+								<i class="fa fa-times"></i>
+								&nbsp;xóa
+							</strong>
+          				</button>
+					</td>
+				</tr>
+				<!-- {{/results}} -->
 
-        [[ ${DOMAIN_WAREHOUSE} ]] <br>
-        [[ ${REQUEST_GET_ALL} ]] <br>
-        [[ ${PATH_ACTION} ]]
+				<!-- {{^results}} -->
+				<tr>
+					<td colspan="5">Danh sách rỗng</td>
+				</tr>
+				<!-- {{/results}} -->
+			</tbody>
+		</table>
+	</div>
+	
+	<!-- The Modal -->
+	<div class="modal fade" id="add_customer">
+		<div class="modal-dialog">
+		  <div class="modal-content">		
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h6 class="modal-title text-uppercase">
+						<strong>khách hàng</strong>
+					</h6>
+					
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+	  
+				<!-- Modal body -->
+				<div class="modal-body">
+					<div class="d-none" id="success_customer">
+					</div>
 
-        </div>
-    </div>
+					<div class="d-none" id="danger_customer">
+					</div>
+
+					<table class="table table-bordered">
+						<tbody>
+							<tr>
+								<td colspan="2">
+									<form>
+										<div class="form-group">
+											<input type="text" class="form-control" placeholder="Tên khách hàng" name="name">
+                                        </div>
+                                        
+                                        <div class="form-group">
+											<input type="text" class="form-control" placeholder="Địa chỉ khách hàng" name="address">
+										</div>
+					
+										<button class="btn btn-info mr-3">thêm</button>
+									</form>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+		  </div>
+		</div>
+	</div>
+
+	<!-- The Modal -->
+	<div class="modal fade" id="edit_customer">
+			<div class="modal-dialog">
+				<div class="modal-content">		
+					<!-- Modal Header -->
+					<div class="modal-header">
+						<h6 class="modal-title text-uppercase">
+							<strong>khách hàng</strong>
+						</h6>
+						
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+			
+					<!-- Modal body -->
+					<div class="modal-body">
+						<div class="d-none" id="success_customer">
+							<div class="alert alert-success">
+							</div>
+						</div>
+	
+						<div class="d-none" id="danger_customer">
+						</div>
+	
+						<table class="table table-bordered">
+							<tbody>
+								<tr>
+									<td colspan="2">
+										<div id="edit_customer_show"></div>
+
+										<div id="tplEditCustomer" class="d-none">
+											<form>
+
+												{{#results}}
+												<div class="form-group">
+													<input type="text" class="form-control" placeholder="STT" 
+													name="id" value="{{id}}" disabled>
+												</div>
+												<div class="form-group">
+													<input type="text" class="form-control" placeholder="Tên khách hàng" 
+													name="name" value="{{name}}">
+                                                </div>
+                                                <div class="form-group">
+													<input type="text" class="form-control" placeholder="Địa chỉ khách hàng" 
+													name="address" value="{{address}}">
+												</div>
+												<div class="form-group">
+													<input type="text" class="form-control" placeholder="Thời gian tạo" 
+													name="createdTime" value="{{createdTime}}" disabled>
+												</div>
+												<div class="form-group">
+													<input type="text" class="form-control" placeholder="Thời gian sửa" 
+													name="updatedTime" value="{{updatedTime}}" disabled>
+												</div>
+												{{/results}}
+							
+												<button class="btn btn-warning mr-3">cập nhật</button>
+											</form>
+										</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+	</div>
+
+	<!-- The Modal -->
+	<div class="modal fade" id="delete_customer">
+		<div class="modal-dialog">
+			<div class="modal-content">		
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h6 class="modal-title text-uppercase">
+						<strong>Bạn muốn xóa khách hàng này?</strong>
+					</h6>
+					
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+		
+				<!-- Modal body -->
+				<div class="modal-body">
+					<div class="d-none" id="success_customer">
+						<div class="alert alert-success">
+						</div>
+					</div>
+
+					<div class="d-none" id="danger_customer">
+					</div>
+
+					<table class="table table-bordered">
+						<tbody>
+							<tr>
+								<td>
+									<button type="button" class="btn btn-primary" id="btn_delete">
+										Xóa
+									</button>
+
+									<button type="button" class="btn btn-danger" data-dismiss="modal">
+										Hủy
+									</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
 
 </th:block>
 
