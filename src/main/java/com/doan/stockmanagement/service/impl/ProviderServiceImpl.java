@@ -9,25 +9,25 @@ import org.springframework.stereotype.Service;
 
 import com.doan.stockmanagement.common.CommonUtils;
 import com.doan.stockmanagement.common.ResponseApi;
-import com.doan.stockmanagement.entities.Warehouse;
-import com.doan.stockmanagement.repository.WarehouseRepository;
-import com.doan.stockmanagement.service.WarehouseService;
+import com.doan.stockmanagement.entities.Provider;
+import com.doan.stockmanagement.repository.ProviderRepository;
+import com.doan.stockmanagement.service.ProviderService;
 
 @Service
-public class WareHouseServiceImpl implements WarehouseService {
-    
-    @Autowired
-    private WarehouseRepository warehouseRepository;
-    
-    @Override
-    public ResponseApi<List<Warehouse>> getWarehouse() {
+public class ProviderServiceImpl implements ProviderService {
 
-        ResponseApi<List<Warehouse>> responseApi = new ResponseApi<>();
+    @Autowired
+    private ProviderRepository providerRepository;
+
+    @Override
+    public ResponseApi<List<Provider>> getProvider() {
+
+        ResponseApi<List<Provider>> responseApi = new ResponseApi<>();
 
         try {
             responseApi = CommonUtils.buildResponse(HttpStatus.OK.value(),
                     HttpStatus.OK.name(),
-                    warehouseRepository.findAll());
+                    providerRepository.findAll());
         } catch (Exception e) {
             responseApi = CommonUtils.buildResponse(HttpStatus.BAD_REQUEST.value(),
                     e.getMessage(),
@@ -38,48 +38,48 @@ public class WareHouseServiceImpl implements WarehouseService {
     }
 
     @Override
-    public ResponseApi<Warehouse> getWarehouseById(Integer id) {
+    public ResponseApi<Provider> getProviderById(Integer id) {
         
-        ResponseApi<Warehouse> responseApi = new ResponseApi<>();
+        ResponseApi<Provider> responseApi = new ResponseApi<>();
 
         try {
             responseApi = CommonUtils.buildResponse(HttpStatus.OK.value(),
                     HttpStatus.OK.name(),
-                    warehouseRepository.findById(id).get());
+                    providerRepository.findById(id).get());
         } catch (Exception e) {
             responseApi = CommonUtils.buildResponse(HttpStatus.BAD_REQUEST.value(),
                     e.getMessage(),
-                    new Warehouse());
+                    new Provider());
         }
 
         return responseApi;
     }
 
     @Override
-    public ResponseApi<Warehouse> saveWarehouse(Warehouse warehouse) {
-        
-        ResponseApi<Warehouse> responseApi = new ResponseApi<>();
+    public ResponseApi<Provider> saveProvider(Provider provider) {
+
+        ResponseApi<Provider> responseApi = new ResponseApi<>();
 
         try {
             responseApi = CommonUtils.buildResponse(HttpStatus.OK.value(),
                     HttpStatus.OK.name(),
-                    warehouseRepository.save(warehouse));
+                    providerRepository.save(provider));
         } catch (Exception e) {
             responseApi = CommonUtils.buildResponse(HttpStatus.BAD_REQUEST.value(),
                     e.getMessage(),
-                    new Warehouse());
+                    new Provider());
         }
 
         return responseApi;
     }
 
     @Override
-    public ResponseApi<Object> deleteWarehouse(Integer id) {
+    public ResponseApi<Object> deleteProvider(Integer id) {
         
         ResponseApi<Object> responseApi = new ResponseApi<>();
 
         try {
-            warehouseRepository.deleteById(id);
+            providerRepository.deleteById(id);
             responseApi = CommonUtils.buildResponse(HttpStatus.OK.value(),
                     HttpStatus.OK.name(),
                     null);
