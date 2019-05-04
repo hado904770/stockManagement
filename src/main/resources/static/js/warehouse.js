@@ -296,8 +296,8 @@ $(document).ready(function() {
 						elDel.find(`#danger_warehouse`)
 						.removeClass(`d-block`).addClass(`d-none`)
 						.html(``);
-
 						elDel.find(`#success_warehouse`).removeClass(`d-none`).addClass(`d-block`).html(suc);
+						
 						getWarehouse();
 					}
 				},

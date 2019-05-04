@@ -261,7 +261,6 @@ $(document).ready(function() {
 
 			$(`#delete_provider button[id='btn_delete']`).attr("row_id", id);
 
-
 		});
 	}
 
@@ -302,8 +301,8 @@ $(document).ready(function() {
 						elDel.find(`#danger_provider`)
 						.removeClass(`d-block`).addClass(`d-none`)
 						.html(``);
-
-						elDel.find(`#success_provider`).removeClass(`d-none`).addClass(`d-block`).html(suc);
+                        elDel.find(`#success_provider`).removeClass(`d-none`).addClass(`d-block`).html(suc);
+                        
 						getProvider();
 					}
 				},

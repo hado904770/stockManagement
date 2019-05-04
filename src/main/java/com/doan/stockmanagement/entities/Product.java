@@ -5,9 +5,6 @@ import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -25,11 +22,6 @@ import lombok.Setter;
 @Entity
 @Table(name = "PRODUCT")
 public class Product extends CommonEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
-    private Integer id;
 
     @NotNull
     @Column(name = "CODE")
@@ -49,12 +41,10 @@ public class Product extends CommonEntity {
     @Column(name = "EXP")
     private LocalDate exp; // Expiry date
 
-    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "WAREHOUSE_ID")
     private Warehouse warehouse;
 
-    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PROVIDER_ID")
     private Provider provider;

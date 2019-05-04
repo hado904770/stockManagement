@@ -302,8 +302,8 @@ $(document).ready(function() {
 						elDel.find(`#danger_customer`)
 						.removeClass(`d-block`).addClass(`d-none`)
 						.html(``);
-
-						elDel.find(`#success_customer`).removeClass(`d-none`).addClass(`d-block`).html(suc);
+                        elDel.find(`#success_customer`).removeClass(`d-none`).addClass(`d-block`).html(suc);
+                        
 						getCustomer();
 					}
 				},
