@@ -48,7 +48,7 @@ $(document).ready(function() {
 	}
 	
 	function insertProvider() {
-		$('#add_provider').on(`click`, `button`, function(e) {
+		$('#add_provider').on(`click`, `button[id='add_btn']`, function(e) {
 			e.preventDefault();
 			let elAdd = $(`#add_provider`);
             let name = elAdd.find(`input[name=name]`).val();
@@ -182,7 +182,7 @@ $(document).ready(function() {
 	}
 
 	function updateProvider() {
-		$('#edit_provider').on(`click`, `button`, function(e) {
+		$('#edit_provider').on(`click`, `button[id='edit_btn']`, function(e) {
 			e.preventDefault();
 			let elEdit = $(`#edit_provider`);
 
@@ -259,14 +259,14 @@ $(document).ready(function() {
 			elDel.find(`#danger_provider`).removeClass(`d-block`).addClass(`d-none`).html(``);
 			elDel.find(`#success_provider`).removeClass(`d-block`).addClass(`d-none`).html(``);
 
-			$(`#delete_provider button[id='btn_delete']`).attr("row_id", id);
+			$(`#delete_provider button[id='delete_btn']`).attr("row_id", id);
 
 		});
 	}
 
 	function deleteProvider() {
 
-		$('#delete_provider').on(`click`, `button[id='btn_delete']`, function(e) {
+		$('#delete_provider').on(`click`, `button[id='delete_btn']`, function(e) {
 			let id = $(this).attr(`row_id`);
 			let elDel = $(`#delete_provider`);
 			e.preventDefault();

@@ -48,7 +48,7 @@ $(document).ready(function() {
 	}
 	
 	function insertCustomer() {
-		$('#add_customer').on(`click`, `button`, function(e) {
+		$('#add_customer').on(`click`, `button[id='add_btn']`, function(e) {
 			e.preventDefault();
 			let elAdd = $(`#add_customer`);
             let name = elAdd.find(`input[name=name]`).val();
@@ -182,7 +182,7 @@ $(document).ready(function() {
 	}
 
 	function updateCustomer() {
-		$('#edit_customer').on(`click`, `button`, function(e) {
+		$('#edit_customer').on(`click`, `button[id='edit_btn']`, function(e) {
 			e.preventDefault();
 			let elEdit = $(`#edit_customer`);
 
@@ -259,15 +259,13 @@ $(document).ready(function() {
 			elDel.find(`#danger_customer`).removeClass(`d-block`).addClass(`d-none`).html(``);
 			elDel.find(`#success_customer`).removeClass(`d-block`).addClass(`d-none`).html(``);
 
-			$(`#delete_customer button[id='btn_delete']`).attr("row_id", id);
-
-
+			$(`#delete_customer button[id='delete_btn']`).attr("row_id", id);
 		});
 	}
 
 	function deleteCustomer() {
 
-		$('#delete_customer').on(`click`, `button[id='btn_delete']`, function(e) {
+		$('#delete_customer').on(`click`, `button[id='delete_btn']`, function(e) {
 			let id = $(this).attr(`row_id`);
 			let elDel = $(`#delete_customer`);
 			e.preventDefault();

@@ -48,7 +48,7 @@ $(document).ready(function() {
 	}
 	
 	function insertWarehouse() {
-		$('#add_warehouse').on(`click`, `button`, function(e) {
+		$('#add_warehouse').on(`click`, `button[id='add_btn']`, function(e) {
 			e.preventDefault();
 			let elAdd = $(`#add_warehouse`);
 			let name = elAdd.find(`input[name=name]`).val();
@@ -179,7 +179,7 @@ $(document).ready(function() {
 	}
 
 	function updateWarehouse() {
-		$('#edit_warehouse').on(`click`, `button`, function(e) {
+		$('#edit_warehouse').on(`click`, `button[id='edit_btn']`, function(e) {
 			e.preventDefault();
 			let elEdit = $(`#edit_warehouse`);
 
@@ -253,7 +253,7 @@ $(document).ready(function() {
 			elDel.find(`#danger_warehouse`).removeClass(`d-block`).addClass(`d-none`).html(``);
 			elDel.find(`#success_warehouse`).removeClass(`d-block`).addClass(`d-none`).html(``);
 
-			$(`#delete_warehouse button[id='btn_delete']`).attr("row_id", id);
+			$(`#delete_warehouse button[id='delete_btn']`).attr("row_id", id);
 
 
 		});
@@ -261,7 +261,7 @@ $(document).ready(function() {
 
 	function deleteWarehouse() {
 
-		$('#delete_warehouse').on(`click`, `button[id='btn_delete']`, function(e) {
+		$('#delete_warehouse').on(`click`, `button[id='delete_btn']`, function(e) {
 			let id = $(this).attr(`row_id`);
 			let elDel = $(`#delete_warehouse`);
 			e.preventDefault();

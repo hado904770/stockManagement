@@ -17,6 +17,10 @@ tbody td {
     padding: 0.25rem;
 }
 
+thead .td_4 {
+  width: 4rem;
+}
+
 thead .td_10 {
   width: 10rem;
 }

@@ -11,6 +11,7 @@ const GOODS_DELIVERY_NOTE = "/goods_delivery_note";
 const REQUEST_GET_ALL = "/get-all";
 const REQUEST_SAVE = "/save";
 const REQUEST_DELETE = "/delete";
+const REQUEST_GET_CODE = "/get-code";
 
 const LOAD_WAITING = 
 '<div class="backdrop show">' +

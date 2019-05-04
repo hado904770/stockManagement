@@ -37,6 +37,7 @@
 		<table class="table table-bordered">
 			<thead class="text-uppercase">
 				<tr>
+					<th class="td_4"></th>
 					<th>stt</th>
           <th>mã sản phẩm</th>
 					<th>tên</th>
@@ -49,38 +50,60 @@
 			<tbody>
 				<!-- {{#results}} -->
 				<tr row_id={{id}}>
+					<td>
+						<button class="btn btn-info"
+						data-toggle="collapse" data-target="#show_info_{{id}}">
+							<i class="fa fa-plus"></i>
+						</button>
+					</td>
 					<td>{{id}}</td>
+					<td>{{code}}</td>
           <td>{{name}}</td>
           <td>{{mfg}}</td>
 					<td>{{exp}}</td>
 					<td>
-						<button data-toggle="collapse" data-target="#show_info_{{id}}">
-								<i class="fa fa-plus"></i>
-						</button>
-					</td>
+							<button type="button" class="btn btn-info btn-sm"
+								data-toggle="modal" data-target="#edit_product">
+												<strong>
+									<i class="fa fa-pencil-square-o"></i>
+									&nbsp;sửa
+								</strong>
+							</button>
+						
+							<button type="button" class="btn btn-warning btn-sm"
+											data-toggle="modal" data-target="#delete_product">
+												<strong>
+									<i class="fa fa-times"></i>
+									&nbsp;xóa
+								</strong>
+										</button>
+						</td>
+					</tr>
 				</tr>
 
 				<tr id="show_info_{{id}}" class="collapse">
-					<table class="table">
-						<thead>
-							<tr>
-								<th class="td_10">thời gian tạo</th>
-								<th class="td_10">thời gian sửa</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr row_id={{id}}>
-								<td>{{createdTime}}</td>
-								<td>{{updatedTime}}</td>
-							</tr>
-						</tbody>
-					</table>
+					<td colspan="7">
+						<table class="table">
+							<thead class="text-uppercase">
+								<tr>
+									<th class="td_10">thời gian tạo</th>
+									<th class="td_10">thời gian sửa</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr row_id={{id}}>
+									<td>{{createdTime}}</td>
+									<td>{{updatedTime}}</td>
+								</tr>
+							</tbody>
+						</table>
+					</td>
 				</tr>
 				<!-- {{/results}} -->
 
 				<!-- {{^results}} -->
 				<tr>
-					<td colspan="5">Danh sách rỗng</td>
+					<td colspan="7">Danh sách rỗng</td>
 				</tr>
 				<!-- {{/results}} -->
 			</tbody>
@@ -117,12 +140,11 @@
 
 									<div id="tplAddProduct" class="d-none">
 										<form>
-											{{#results}}
+											
 											<div class="form-group">
 												<input type="text" class="form-control" placeholder="Mã sản phẩm" name="code"
-												value="{{code}}" disabled>
+												value="{{results}}" disabled>
 											</div>
-											{{/results}}
 
 											<div class="form-group">
 												<input type="text" class="form-control" placeholder="Tên sản phẩm" name="name">
@@ -136,7 +158,7 @@
 												<input type="text" class="form-control" placeholder="Ngày hết hạn" name="exp">
 											</div>
 						
-											<button class="btn btn-info mr-3">thêm</button>
+											<button class="btn btn-info mr-3" id="add_btn">thêm</button>
 										</form>
 									</div>
 									
@@ -210,7 +232,7 @@
 												</div>
 												{{/results}}
 							
-												<button class="btn btn-warning mr-3">cập nhật</button>
+												<button class="btn btn-warning mr-3" id="edit_btn">cập nhật</button>
 											</form>
 										</div>
 									</td>
@@ -247,7 +269,7 @@
 						<tbody>
 							<tr>
 								<td>
-									<button type="button" class="btn btn-primary" id="btn_delete">
+									<button type="button" class="btn btn-primary" id="delete_btn">
 										Xóa
 									</button>
 
