@@ -12,14 +12,14 @@
 		<div class="card-header text-uppercase">
 			<div class="clearfix">
 				<span class="float-left">
-					danh sách các hàng hóa
+					danh sách các sản phẩm
 				</span>
 				<span class="float-right">
 					<button type="button" class="btn btn-primary btn-sm"
 							data-toggle="modal" data-target="#add_product">
 							<strong>
 								<i class="fa fa-plus"></i>
-								&nbsp;thêm hàng hóa
+								&nbsp;thêm sản phẩm
 							</strong>
 					</button>
 				</span>
@@ -41,8 +41,8 @@
 					<th>stt</th>
           <th>mã sản phẩm</th>
 					<th>tên</th>
-					<th>mfg</th>
-					<th>exp</th>
+					<th>ngày sản xuất</th>
+					<th>hạn sử dụng</th>
 					<th class="td_12">thao tác</th>
 				</tr>
 			</thead>
@@ -51,7 +51,7 @@
 				<!-- {{#results}} -->
 				<tr row_id={{id}}>
 					<td>
-						<button class="btn btn-info"
+						<button class="btn"
 						data-toggle="collapse" data-target="#show_info_{{id}}">
 							<i class="fa fa-plus"></i>
 						</button>

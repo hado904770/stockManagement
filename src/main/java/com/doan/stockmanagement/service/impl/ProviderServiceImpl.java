@@ -3,6 +3,8 @@ package com.doan.stockmanagement.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -16,6 +18,8 @@ import com.doan.stockmanagement.service.ProviderService;
 @Service
 public class ProviderServiceImpl implements ProviderService {
 
+    private static Logger LOGGER = LoggerFactory.getLogger(ProviderServiceImpl.class);
+    
     @Autowired
     private ProviderRepository providerRepository;
 
@@ -29,6 +33,7 @@ public class ProviderServiceImpl implements ProviderService {
                     HttpStatus.OK.name(),
                     providerRepository.findAll());
         } catch (Exception e) {
+            LOGGER.error("ERROR getProvider: ", e);
             responseApi = CommonUtils.buildResponse(HttpStatus.BAD_REQUEST.value(),
                     e.getMessage(),
                     new ArrayList<>());
@@ -47,6 +52,7 @@ public class ProviderServiceImpl implements ProviderService {
                     HttpStatus.OK.name(),
                     providerRepository.findById(id).get());
         } catch (Exception e) {
+            LOGGER.error("ERROR getProviderById: ", e);
             responseApi = CommonUtils.buildResponse(HttpStatus.BAD_REQUEST.value(),
                     e.getMessage(),
                     new Provider());
@@ -65,6 +71,7 @@ public class ProviderServiceImpl implements ProviderService {
                     HttpStatus.OK.name(),
                     providerRepository.save(provider));
         } catch (Exception e) {
+            LOGGER.error("ERROR saveProvider: ", e);
             responseApi = CommonUtils.buildResponse(HttpStatus.BAD_REQUEST.value(),
                     e.getMessage(),
                     new Provider());
@@ -84,6 +91,7 @@ public class ProviderServiceImpl implements ProviderService {
                     HttpStatus.OK.name(),
                     null);
         } catch (Exception e) {
+            LOGGER.error("ERROR deleteProvider: ", e);
             responseApi = CommonUtils.buildResponse(HttpStatus.BAD_REQUEST.value(),
                     e.getMessage(),
                     null);

@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -20,6 +22,8 @@ import com.doan.stockmanagement.service.ProductService;
 @Service
 public class ProductServiceImpl implements ProductService {
 
+    private static Logger LOGGER = LoggerFactory.getLogger(ProductServiceImpl.class);
+    
     @Autowired
     private ProductRepository productRepository;
     
@@ -39,6 +43,7 @@ public class ProductServiceImpl implements ProductService {
                     HttpStatus.OK.name(),
                     productDTOs);
         } catch (Exception e) {
+            LOGGER.error("ERROR getProduct: ", e);
             responseApi = CommonUtils.buildResponse(HttpStatus.BAD_REQUEST.value(),
                     e.getMessage(),
                     new ArrayList<>());
@@ -60,6 +65,7 @@ public class ProductServiceImpl implements ProductService {
                     HttpStatus.OK.name(),
                     productDTO);
         } catch (Exception e) {
+            LOGGER.error("ERROR getProductById: ", e);
             responseApi = CommonUtils.buildResponse(HttpStatus.BAD_REQUEST.value(),
                     e.getMessage(),
                     new ProductDTO());
@@ -81,6 +87,7 @@ public class ProductServiceImpl implements ProductService {
                     HttpStatus.OK.name(),
                     productDTO);
         } catch (Exception e) {
+            LOGGER.error("ERROR saveProduct: ", e);
             responseApi = CommonUtils.buildResponse(HttpStatus.BAD_REQUEST.value(),
                     e.getMessage(),
                     new ProductDTO());
@@ -99,6 +106,7 @@ public class ProductServiceImpl implements ProductService {
                     HttpStatus.OK.name(),
                     null);
         } catch (Exception e) {
+            LOGGER.error("ERROR deleteProduct: ", e);
             responseApi = CommonUtils.buildResponse(HttpStatus.BAD_REQUEST.value(),
                     e.getMessage(),
                     null);
@@ -151,6 +159,7 @@ public class ProductServiceImpl implements ProductService {
                     HttpStatus.OK.name(),
                     code.toString());
         } catch (Exception e) {
+            LOGGER.error("ERROR getCodeProduct: ", e);
             responseApi = CommonUtils.buildResponse(HttpStatus.BAD_REQUEST.value(),
                     e.getMessage(),
                     null);
