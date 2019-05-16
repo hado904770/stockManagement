@@ -52,7 +52,7 @@ $(document).ready(function() {
 			e.preventDefault();
 			let elAdd = $(`#add_provider`);
             let name = elAdd.find(`input[name=name]`).val();
-            let address = elAdd.find(`input[name=address]`).val();
+            let address = elAdd.find(`textarea[name=address]`).val();
 
 			$.ajax({
 				type: `POST`,
@@ -88,7 +88,7 @@ $(document).ready(function() {
 
 						elAdd.find(`#success_provider`).removeClass(`d-none`).addClass(`d-block`).html(suc);
                         elAdd.find(`input[name=name]`).val('');
-                        elAdd.find(`input[name=address]`).val('');
+                        elAdd.find(`textarea[name=address]`).val('');
 
 						getProvider();
 					}
@@ -188,7 +188,7 @@ $(document).ready(function() {
 
 			let id = elEdit.find(`input[name=id]`).val();
             let name = elEdit.find(`input[name=name]`).val();
-            let address = elEdit.find(`input[name=address]`).val();
+            let address = elEdit.find(`textarea[name=address]`).val();
 			let createdTime = elEdit.find(`input[name=createdTime]`).val();
 			let updatedTime = elEdit.find(`input[name=updatedTime]`).val();
 
@@ -230,7 +230,7 @@ $(document).ready(function() {
 						elEdit.find(`#success_provider`).removeClass(`d-none`).addClass(`d-block`).html(suc);
 						elEdit.find(`input[name=id]`).val(``);
                         elEdit.find(`input[name=name]`).val(``);
-                        elEdit.find(`input[name=address]`).val(``);
+                        elEdit.find(`textarea[name=address]`).val(``);
 						elEdit.find(`input[name=createdTime]`).val(``);
 						elEdit.find(`input[name=updatedTime]`).val(``);
 
