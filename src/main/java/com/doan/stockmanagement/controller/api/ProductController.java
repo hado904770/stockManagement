@@ -3,7 +3,6 @@ package com.doan.stockmanagement.controller.api;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,14 +23,9 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @PostMapping(value = CommonConstants.REQUEST_GET_ALL)
-    public ResponseApi<List<ProductDTO>> getProduct() {
-        return productService.getProduct();
-    }
-
-    @PostMapping(value = CommonConstants.REQUEST_GET_ALL + "/{id}")
-    public ResponseApi<ProductDTO> getProductById(@PathVariable(name = "id") Integer id) {
-        return productService.getProductById(id);
+    @PostMapping(value = CommonConstants.REQUEST_FILTER)
+    public ResponseApi<List<ProductDTO>> getProduct(@RequestBody Product product) {
+        return productService.getProduct(product);
     }
 
     @PostMapping(value = CommonConstants.REQUEST_SAVE)
@@ -39,9 +33,9 @@ public class ProductController {
         return productService.saveProduct(product);
     }
 
-    @PostMapping(value = CommonConstants.REQUEST_DELETE + "/{id}")
-    public ResponseApi<Object> deleteCustomer(@PathVariable(name = "id") Integer id) {
-        return productService.deleteProduct(id);
+    @PostMapping(value = CommonConstants.REQUEST_DELETE)
+    public ResponseApi<Object> deleteCustomer(@RequestBody Product product) {
+        return productService.deleteProduct(product.getId());
     }
     
     @PostMapping(value = REQUEST_GET_CODE)

@@ -14,7 +14,7 @@ public class CommonConstants {
     public static final String GOODS_RECEIPT_NOTE = "/goods_receipt_note";
     public static final String GOODS_DELIVERY_NOTE = "/goods_delivery_note";
 
-    public static final String REQUEST_GET_ALL = "/get-all";
+    public static final String REQUEST_FILTER = "/filter";
     public static final String REQUEST_SAVE = "/save";
     public static final String REQUEST_DELETE = "/delete";
 

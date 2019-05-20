@@ -3,7 +3,6 @@ package com.doan.stockmanagement.controller.api;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,14 +20,9 @@ public class ProviderController {
     @Autowired
     private ProviderService providerService;
     
-    @PostMapping(value = CommonConstants.REQUEST_GET_ALL)
-    public ResponseApi<List<Provider>> getProvider() {
-        return providerService.getProvider();
-    }
-    
-    @PostMapping(value = CommonConstants.REQUEST_GET_ALL + "/{id}")
-    public ResponseApi<Provider> getProviderById(@PathVariable(name = "id") Integer id) {
-        return providerService.getProviderById(id);
+    @PostMapping(value = CommonConstants.REQUEST_FILTER)
+    public ResponseApi<List<Provider>> getProvider(@RequestBody Provider provider) {
+        return providerService.getProvider(provider);
     }
     
     @PostMapping(value = CommonConstants.REQUEST_SAVE)
@@ -36,9 +30,9 @@ public class ProviderController {
         return providerService.saveProvider(provider);
     }
 
-    @PostMapping(value = CommonConstants.REQUEST_DELETE + "/{id}")
-    public ResponseApi<Object> deleteProvider(@PathVariable(name = "id") Integer id) {
-        return providerService.deleteProvider(id);
+    @PostMapping(value = CommonConstants.REQUEST_DELETE)
+    public ResponseApi<Object> deleteProvider(@RequestBody Provider provider) {
+        return providerService.deleteProvider(provider.getId());
     }
     
 }

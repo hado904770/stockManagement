@@ -8,9 +8,7 @@ import com.doan.stockmanagement.entities.Product;
 
 public interface ProductService {
 
-    ResponseApi<List<ProductDTO>> getProduct();
-
-    ResponseApi<ProductDTO> getProductById(Integer id);
+    ResponseApi<List<ProductDTO>> getProduct(Product product);
 
     ResponseApi<ProductDTO> saveProduct(Product product);
 

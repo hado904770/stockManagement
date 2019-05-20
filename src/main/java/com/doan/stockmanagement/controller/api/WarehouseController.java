@@ -3,7 +3,6 @@ package com.doan.stockmanagement.controller.api;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,24 +20,19 @@ public class WarehouseController {
     @Autowired
     private WarehouseService warehouseService;
 
-    @PostMapping(value = CommonConstants.REQUEST_GET_ALL)
-    public ResponseApi<List<Warehouse>> getWarehouse() {
-        return warehouseService.getWarehouse();
+    @PostMapping(value = CommonConstants.REQUEST_FILTER)
+    public ResponseApi<List<Warehouse>> getWarehouse(@RequestBody Warehouse warehouse) {
+        return warehouseService.getWarehouse(warehouse);
     }
-    
-    @PostMapping(value = CommonConstants.REQUEST_GET_ALL + "/{id}")
-    public ResponseApi<Warehouse> getWarehouseById(@PathVariable(name = "id") Integer id) {
-        return warehouseService.getWarehouseById(id);
-    }
-    
+
     @PostMapping(value = CommonConstants.REQUEST_SAVE)
     public ResponseApi<Warehouse> saveWarehouse(@RequestBody Warehouse warehouse) {
         return warehouseService.saveWarehouse(warehouse);
     }
 
-    @PostMapping(value = CommonConstants.REQUEST_DELETE + "/{id}")
-    public ResponseApi<Object> deleteWarehouse(@PathVariable(name = "id") Integer id) {
-        return warehouseService.deleteWarehouse(id);
+    @PostMapping(value = CommonConstants.REQUEST_DELETE)
+    public ResponseApi<Object> deleteWarehouse(@RequestBody Warehouse warehouse) {
+        return warehouseService.deleteWarehouse(warehouse.getId());
     }
 
 }

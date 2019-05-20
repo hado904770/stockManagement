@@ -3,7 +3,6 @@ package com.doan.stockmanagement.controller.api;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,14 +20,9 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
-    @PostMapping(value = CommonConstants.REQUEST_GET_ALL)
-    public ResponseApi<List<Customer>> getCustomer() {
-        return customerService.getCustomer();
-    }
-
-    @PostMapping(value = CommonConstants.REQUEST_GET_ALL + "/{id}")
-    public ResponseApi<Customer> getCustomerById(@PathVariable(name = "id") Integer id) {
-        return customerService.getCustomerById(id);
+    @PostMapping(value = CommonConstants.REQUEST_FILTER)
+    public ResponseApi<List<Customer>> getCustomer(@RequestBody Customer customer) {
+        return customerService.getCustomer(customer);
     }
 
     @PostMapping(value = CommonConstants.REQUEST_SAVE)
@@ -36,9 +30,9 @@ public class CustomerController {
         return customerService.saveCustomer(customer);
     }
 
-    @PostMapping(value = CommonConstants.REQUEST_DELETE + "/{id}")
-    public ResponseApi<Object> deleteCustomer(@PathVariable(name = "id") Integer id) {
-        return customerService.deleteCustomer(id);
+    @PostMapping(value = CommonConstants.REQUEST_DELETE)
+    public ResponseApi<Object> deleteCustomer(@RequestBody Customer customer) {
+        return customerService.deleteCustomer(customer.getId());
     }
 
 }

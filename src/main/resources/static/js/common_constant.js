@@ -8,7 +8,7 @@ const DOMAIN_GOODS_DELIVERY_NOTE = "/goods-delivery-note";
 const GOODS_RECEIPT_NOTE = "/goods_receipt_note";
 const GOODS_DELIVERY_NOTE = "/goods_delivery_note";
 
-const REQUEST_GET_ALL = "/get-all";
+const REQUEST_FILTER = "/filter";
 const REQUEST_SAVE = "/save";
 const REQUEST_DELETE = "/delete";
 const REQUEST_GET_CODE = "/get-code";

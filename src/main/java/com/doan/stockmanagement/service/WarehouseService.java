@@ -7,9 +7,7 @@ import com.doan.stockmanagement.entities.Warehouse;
 
 public interface WarehouseService {
 
-    ResponseApi<List<Warehouse>> getWarehouse();
-    
-    ResponseApi<Warehouse> getWarehouseById(Integer id);
+    ResponseApi<List<Warehouse>> getWarehouse(Warehouse warehouse);
 
     ResponseApi<Warehouse> saveWarehouse(Warehouse warehouse);
 

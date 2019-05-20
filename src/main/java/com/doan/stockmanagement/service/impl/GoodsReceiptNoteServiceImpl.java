@@ -48,27 +48,6 @@ public class GoodsReceiptNoteServiceImpl implements GoodsReceiptNoteService {
 
         return responseApi;
     }
-    
-    @Override
-    public ResponseApi<GoodsCommonNoteDTO> getGoodsReceiptNoteById(Integer id) {
-        ResponseApi<GoodsCommonNoteDTO> responseApi = new ResponseApi<>();
-
-        try {
-            GoodsReceiptNote goodsReceiptNote = goodsReceiptNoteRepository.findById(id).get();
-            GoodsCommonNoteDTO goodsCommonNoteDTO = goodsReceiptNoteMapper.toGoodsCommonNoteDTO(goodsReceiptNote);
-            
-            responseApi = CommonUtils.buildResponse(HttpStatus.OK.value(),
-                    HttpStatus.OK.name(),
-                    goodsCommonNoteDTO);
-        } catch (Exception e) {
-            LOGGER.error("ERROR getProductById: ", e);
-            responseApi = CommonUtils.buildResponse(HttpStatus.BAD_REQUEST.value(),
-                    e.getMessage(),
-                    new GoodsCommonNoteDTO());
-        }
-
-        return responseApi;
-    }
 
     @Override
     public ResponseApi<GoodsCommonNoteDTO> saveGoodsReceiptNote(GoodsReceiptNote goodsReceiptNote) {

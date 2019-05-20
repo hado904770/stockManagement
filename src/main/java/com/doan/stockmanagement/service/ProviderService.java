@@ -7,9 +7,7 @@ import com.doan.stockmanagement.entities.Provider;
 
 public interface ProviderService {
 
-    ResponseApi<List<Provider>> getProvider();
-
-    ResponseApi<Provider> getProviderById(Integer id);
+    ResponseApi<List<Provider>> getProvider(Provider provider);
 
     ResponseApi<Provider> saveProvider(Provider provider);
 

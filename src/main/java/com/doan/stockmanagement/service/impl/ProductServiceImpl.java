@@ -8,6 +8,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,7 @@ import com.doan.stockmanagement.entities.Product;
 import com.doan.stockmanagement.mapper.ProductMapper;
 import com.doan.stockmanagement.repository.ProductRepository;
 import com.doan.stockmanagement.service.ProductService;
+import com.doan.stockmanagement.specs.ProductSpecification;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -31,12 +33,16 @@ public class ProductServiceImpl implements ProductService {
     private ProductMapper productMapper;
 
     @Override
-    public ResponseApi<List<ProductDTO>> getProduct() {
+    public ResponseApi<List<ProductDTO>> getProduct(Product product) {
         
         ResponseApi<List<ProductDTO>> responseApi = new ResponseApi<>();
 
         try {
-            List<Product> products = productRepository.findAll();
+            List<Product> products = productRepository.findAll(
+                    Specification.where(ProductSpecification.hasId(product.getId()))
+                    .and(ProductSpecification.hasCode(product.getCode()))
+                    .and(ProductSpecification.hasName(product.getName())));
+            
             List<ProductDTO> productDTOs = productMapper.toProductDTOs(products);
             
             responseApi = CommonUtils.buildResponse(HttpStatus.OK.value(),
@@ -47,28 +53,6 @@ public class ProductServiceImpl implements ProductService {
             responseApi = CommonUtils.buildResponse(HttpStatus.BAD_REQUEST.value(),
                     e.getMessage(),
                     new ArrayList<>());
-        }
-
-        return responseApi;
-    }
-
-    @Override
-    public ResponseApi<ProductDTO> getProductById(Integer id) {
-        
-        ResponseApi<ProductDTO> responseApi = new ResponseApi<>();
-
-        try {
-            Product product = productRepository.findById(id).get();
-            ProductDTO productDTO = productMapper.toProductDTO(product);
-            
-            responseApi = CommonUtils.buildResponse(HttpStatus.OK.value(),
-                    HttpStatus.OK.name(),
-                    productDTO);
-        } catch (Exception e) {
-            LOGGER.error("ERROR getProductById: ", e);
-            responseApi = CommonUtils.buildResponse(HttpStatus.BAD_REQUEST.value(),
-                    e.getMessage(),
-                    new ProductDTO());
         }
 
         return responseApi;

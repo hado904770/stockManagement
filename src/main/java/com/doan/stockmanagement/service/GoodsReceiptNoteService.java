@@ -9,8 +9,6 @@ import com.doan.stockmanagement.entities.GoodsReceiptNote;
 public interface GoodsReceiptNoteService {
 
     ResponseApi<List<GoodsCommonNoteDTO>> getGoodsReceiptNote();
-    
-    ResponseApi<GoodsCommonNoteDTO> getGoodsReceiptNoteById(Integer id);
 
     ResponseApi<GoodsCommonNoteDTO> saveGoodsReceiptNote(GoodsReceiptNote goodsReceiptNote);
 

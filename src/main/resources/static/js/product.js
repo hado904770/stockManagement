@@ -17,12 +17,12 @@ $(document).ready(function() {
     function getProduct() {
         $.ajax({
 			type: `POST`,
-			url: DOMAIN_PRODUCT + REQUEST_GET_ALL,
+			url: DOMAIN_PRODUCT + REQUEST_FILTER,
 			contentType: `application/json`,
 			dataType: `json`,
-			data: {
-			    // No data
-			},
+			data: JSON.stringify({
+				//No data
+			}),
 			beforeSend: function() {
 				$(`#loading`).html(LOAD_WAITING);
 			},
@@ -186,11 +186,11 @@ $(document).ready(function() {
 
 			$.ajax({
 				type: `POST`,
-				url: DOMAIN_PRODUCT + REQUEST_GET_ALL + "/" + id,
+				url: DOMAIN_PRODUCT + REQUEST_FILTER,
 				contentType: `application/json`,
 				dataType: `json`,
 				data: JSON.stringify({
-					// No data
+					id: id
 				}),
 				beforeSend: function() {
 					$(`#loading`).html(LOAD_WAITING);
@@ -339,11 +339,11 @@ $(document).ready(function() {
 
 			$.ajax({
 				type: `POST`,
-				url: DOMAIN_PRODUCT + REQUEST_DELETE + "/" + id,
+				url: DOMAIN_PRODUCT + REQUEST_DELETE,
 				contentType: `application/json`,
 				dataType: `json`,
 				data: JSON.stringify({
-					//No data
+					id: id
 				}),
 				beforeSend: function() {
 					$(`#loading`).html(LOAD_WAITING);
