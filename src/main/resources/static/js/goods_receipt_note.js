@@ -43,6 +43,9 @@ function blockInsertGoodsReceiptNode() {
             success: function(res) {
               console.log(res);
               elLiveSearch.html("");
+              elLiveSearch.html(
+                Mustache.to_html($(`#tplSearchProducts`).html(), res)
+              );
 
               elInsert
                 .find(`#danger_goods_receipt_note`)

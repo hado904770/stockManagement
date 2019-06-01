@@ -93,6 +93,36 @@
 
     </div>
 
+    <div id="tplSearchProducts" class="d-none">
+        <div class="card">
+            <div class="card-body p-2">
+                <table class="table table-bordered m-0">
+                    <tbody>
+                        <!-- {{#data}} -->
+                        <tr row_id={{id}} row_name={{name}}>
+                            <td style="font-size: 13px;">{{code}}</td>
+                            <td style="width: 12rem;">{{name}}</td>
+                            <td>
+                                <button type="button" class="btn btn-primary btn-sm"
+                                    id="add_skill_product">
+                                    <strong>
+                                    <i class="fa fa-plus-circle"></i>
+                                    </strong>
+                                </button>
+                            </td>
+                        </tr>
+                        <!-- {{/data}} -->
+                        <!-- {{^data}} -->
+                        <tr>
+                            <td colspan="4">No results match</td>
+                        </tr>
+                        <!-- {{/data}} -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
 </th:block>
 
 </html>
