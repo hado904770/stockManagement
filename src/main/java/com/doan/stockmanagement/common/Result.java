@@ -5,10 +5,10 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class ResponseApi <T> {
+public class Result <T> {
     
     private int status;
     private String message;
-    private T results;
+    private T data;
     
 }

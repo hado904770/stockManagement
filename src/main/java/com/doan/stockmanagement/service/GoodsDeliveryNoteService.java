@@ -2,16 +2,18 @@ package com.doan.stockmanagement.service;
 
 import java.util.List;
 
-import com.doan.stockmanagement.common.ResponseApi;
+import org.springframework.http.ResponseEntity;
+
+import com.doan.stockmanagement.common.Result;
 import com.doan.stockmanagement.dtos.GoodsCommonNoteDTO;
 import com.doan.stockmanagement.entities.GoodsDeliveryNote;
 
 public interface GoodsDeliveryNoteService {
-    
-    ResponseApi<List<GoodsCommonNoteDTO>> getGoodsDeliveryNote();
 
-    ResponseApi<GoodsCommonNoteDTO> saveGoodsDeliveryNote(GoodsDeliveryNote goodsDeliveryNote);
+    ResponseEntity<Result<List<GoodsCommonNoteDTO>>> getGoodsDeliveryNote();
 
-    ResponseApi<Object> deleteGoodsDeliveryNote(Integer id);
-    
+    ResponseEntity<Result<Object>> saveGoodsDeliveryNote(GoodsDeliveryNote goodsDeliveryNote);
+
+    ResponseEntity<Result<Object>> deleteGoodsDeliveryNote(Integer id);
+
 }

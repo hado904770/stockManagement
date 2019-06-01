@@ -47,7 +47,7 @@
 			</thead>
 			
 			<tbody>
-				<!-- {{#results}} -->
+				<!-- {{#data}} -->
 				<tr row_id={{id}}>
 					<td>{{id}}</td>
 					<td>{{name}}</td>
@@ -72,13 +72,13 @@
           				</button>
 					</td>
 				</tr>
-				<!-- {{/results}} -->
+				<!-- {{/data}} -->
 
-				<!-- {{^results}} -->
+				<!-- {{^data}} -->
 				<tr>
 					<td colspan="5">Danh sách rỗng</td>
 				</tr>
-				<!-- {{/results}} -->
+				<!-- {{/data}} -->
 			</tbody>
 		</table>
 	</div>
@@ -161,7 +161,7 @@
 										<div id="tplEditCustomer" class="d-none">
 											<form>
 
-												{{#results}}
+												<!-- {{#data}} -->
 												<div class="form-group">
 													<input type="text" class="form-control" placeholder="STT" 
 													name="id" value="{{id}}" disabled>
@@ -182,7 +182,7 @@
 													<input type="text" class="form-control" placeholder="Thời gian sửa" 
 													name="updatedTime" value="{{updatedTime}}" disabled>
 												</div>
-												{{/results}}
+												<!-- {{/data}} -->
 							
 												<button class="btn btn-warning mr-3" id="edit_btn">
 														<i class="fa fa-floppy-o"></i>

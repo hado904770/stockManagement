@@ -48,7 +48,7 @@
 			</thead>
 			
 			<tbody>
-				<!-- {{#results}} -->
+				<!-- {{#data}} -->
 				<tr row_id={{id}}>
 					<td>
 						<button class="btn"
@@ -99,13 +99,13 @@
 						</table>
 					</td>
 				</tr>
-				<!-- {{/results}} -->
+				<!-- {{/data}} -->
 
-				<!-- {{^results}} -->
+				<!-- {{^data}} -->
 				<tr>
 					<td colspan="7">Danh sách rỗng</td>
 				</tr>
-				<!-- {{/results}} -->
+				<!-- {{/data}} -->
 			</tbody>
 		</table>
 	</div>
@@ -143,7 +143,7 @@
 											
 											<div class="form-group">
 												<input type="text" class="form-control" placeholder="Mã sản phẩm" name="code"
-												value="{{results}}" disabled>
+												value="{{data}}" disabled>
 											</div>
 
 											<div class="form-group">
@@ -204,7 +204,7 @@
 										<div id="tplEditProduct" class="d-none">
 											<form>
 
-												{{#results}}
+												<!-- {{#data}} -->
 												<div class="form-group">
 													<input type="text" class="form-control" placeholder="STT" 
 													name="id" value="{{id}}" disabled>
@@ -233,7 +233,7 @@
 													<input type="text" class="form-control" placeholder="Thời gian sửa" 
 													name="updatedTime" value="{{updatedTime}}" disabled>
 												</div>
-												{{/results}}
+												<!-- {{/data}} -->
 							
 												<button class="btn btn-warning mr-3" id="edit_btn">
 														<i class="fa fa-floppy-o"></i>

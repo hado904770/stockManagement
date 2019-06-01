@@ -2,15 +2,17 @@ package com.doan.stockmanagement.service;
 
 import java.util.List;
 
-import com.doan.stockmanagement.common.ResponseApi;
+import org.springframework.http.ResponseEntity;
+
+import com.doan.stockmanagement.common.Result;
 import com.doan.stockmanagement.entities.Provider;
 
 public interface ProviderService {
 
-    ResponseApi<List<Provider>> getProvider(Provider provider);
+    ResponseEntity<Result<List<Provider>>> getProvider(Provider provider);
 
-    ResponseApi<Provider> saveProvider(Provider provider);
+    ResponseEntity<Result<Object>> saveProvider(Provider provider);
 
-    ResponseApi<Object> deleteProvider(Integer id);
+    ResponseEntity<Result<Object>> deleteProvider(Integer id);
 
 }

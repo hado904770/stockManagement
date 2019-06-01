@@ -2,15 +2,17 @@ package com.doan.stockmanagement.service;
 
 import java.util.List;
 
-import com.doan.stockmanagement.common.ResponseApi;
+import org.springframework.http.ResponseEntity;
+
+import com.doan.stockmanagement.common.Result;
 import com.doan.stockmanagement.entities.Customer;
 
 public interface CustomerService {
 
-    ResponseApi<List<Customer>> getCustomer(Customer customer);
+    ResponseEntity<Result<List<Customer>>> getCustomer(Customer customer);
 
-    ResponseApi<Customer> saveCustomer(Customer customer);
+    ResponseEntity<Result<Object>> saveCustomer(Customer customer);
 
-    ResponseApi<Object> deleteCustomer(Integer id);
+    ResponseEntity<Result<Object>> deleteCustomer(Integer id);
 
 }

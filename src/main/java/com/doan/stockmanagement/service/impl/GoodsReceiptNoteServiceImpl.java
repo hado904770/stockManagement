@@ -7,10 +7,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.doan.stockmanagement.common.CommonUtils;
-import com.doan.stockmanagement.common.ResponseApi;
+import com.doan.stockmanagement.common.Result;
 import com.doan.stockmanagement.dtos.GoodsCommonNoteDTO;
 import com.doan.stockmanagement.entities.GoodsReceiptNote;
 import com.doan.stockmanagement.mapper.GoodsReceiptNoteMapper;
@@ -21,73 +22,59 @@ import com.doan.stockmanagement.service.GoodsReceiptNoteService;
 public class GoodsReceiptNoteServiceImpl implements GoodsReceiptNoteService {
 
     private static Logger LOGGER = LoggerFactory.getLogger(GoodsReceiptNoteServiceImpl.class);
-    
+
     @Autowired
     private GoodsReceiptNoteRepository goodsReceiptNoteRepository;
-    
+
     @Autowired
     private GoodsReceiptNoteMapper goodsReceiptNoteMapper;
-    
+
     @Override
-    public ResponseApi<List<GoodsCommonNoteDTO>> getGoodsReceiptNote() {
-        ResponseApi<List<GoodsCommonNoteDTO>> responseApi = new ResponseApi<>();
+    public ResponseEntity<Result<List<GoodsCommonNoteDTO>>> getGoodsReceiptNote() {
+        ResponseEntity<Result<List<GoodsCommonNoteDTO>>> responseEntity = new ResponseEntity<>(HttpStatus.PROCESSING);
 
         try {
             List<GoodsReceiptNote> goodsReceiptNotes = goodsReceiptNoteRepository.findAll();
-            List<GoodsCommonNoteDTO> goodsCommonNoteDTOs = goodsReceiptNoteMapper.toGoodsCommonNoteDTOs(goodsReceiptNotes);
-            
-            responseApi = CommonUtils.buildResponse(HttpStatus.OK.value(),
-                    HttpStatus.OK.name(),
-                    goodsCommonNoteDTOs);
+            List<GoodsCommonNoteDTO> goodsCommonNoteDTOs = goodsReceiptNoteMapper
+                    .toGoodsCommonNoteDTOs(goodsReceiptNotes);
+
+            responseEntity = CommonUtils.buildResponse(HttpStatus.OK, HttpStatus.OK.name(), goodsCommonNoteDTOs);
         } catch (Exception e) {
             LOGGER.error("ERROR getGoodsReceiptNote: ", e);
-            responseApi = CommonUtils.buildResponse(HttpStatus.BAD_REQUEST.value(),
-                    e.getMessage(),
-                    new ArrayList<>());
+            responseEntity = CommonUtils.buildResponse(HttpStatus.BAD_REQUEST, e.getMessage(), new ArrayList<>());
         }
 
-        return responseApi;
+        return responseEntity;
     }
 
     @Override
-    public ResponseApi<GoodsCommonNoteDTO> saveGoodsReceiptNote(GoodsReceiptNote goodsReceiptNote) {
-        ResponseApi<GoodsCommonNoteDTO> responseApi = new ResponseApi<>();
+    public ResponseEntity<Result<Object>> saveGoodsReceiptNote(GoodsReceiptNote goodsReceiptNote) {
+        ResponseEntity<Result<Object>> responseEntity = new ResponseEntity<>(HttpStatus.PROCESSING);
 
         try {
-            
-            GoodsReceiptNote g = goodsReceiptNoteRepository.save(goodsReceiptNote);
-            GoodsCommonNoteDTO goodsCommonNoteDTO = goodsReceiptNoteMapper.toGoodsCommonNoteDTO(g);
-            
-            responseApi = CommonUtils.buildResponse(HttpStatus.OK.value(),
-                    HttpStatus.OK.name(),
-                    goodsCommonNoteDTO);
+            goodsReceiptNoteRepository.save(goodsReceiptNote);
+            responseEntity = CommonUtils.buildResponse(HttpStatus.OK, HttpStatus.OK.name(), null);
         } catch (Exception e) {
             LOGGER.error("ERROR getGoodsReceiptNote: ", e);
-            responseApi = CommonUtils.buildResponse(HttpStatus.BAD_REQUEST.value(),
-                    e.getMessage(),
-                    new GoodsCommonNoteDTO());
+            responseEntity = CommonUtils.buildResponse(HttpStatus.BAD_REQUEST, e.getMessage(), null);
         }
 
-        return responseApi;
+        return responseEntity;
     }
 
     @Override
-    public ResponseApi<Object> deleteGoodsReceiptNote(Integer id) {
-        ResponseApi<Object> responseApi = new ResponseApi<>();
+    public ResponseEntity<Result<Object>> deleteGoodsReceiptNote(Integer id) {
+        ResponseEntity<Result<Object>> responseEntity = new ResponseEntity<>(HttpStatus.PROCESSING);
 
         try {
             goodsReceiptNoteRepository.deleteById(id);
-            responseApi = CommonUtils.buildResponse(HttpStatus.OK.value(),
-                    HttpStatus.OK.name(),
-                    null);
+            responseEntity = CommonUtils.buildResponse(HttpStatus.OK, HttpStatus.OK.name(), null);
         } catch (Exception e) {
             LOGGER.error("ERROR deleteGoodsReceiptNote: ", e);
-            responseApi = CommonUtils.buildResponse(HttpStatus.BAD_REQUEST.value(),
-                    e.getMessage(),
-                    null);
+            responseEntity = CommonUtils.buildResponse(HttpStatus.BAD_REQUEST, e.getMessage(), null);
         }
 
-        return responseApi;
+        return responseEntity;
     }
 
 }

@@ -3,6 +3,7 @@ package com.doan.stockmanagement.common;
 public class CommonConstants {
 
     public static final String DOMAIN_INIT = "/";
+    public static final String DOMAIN_API = "/api";
     public static final String DOMAIN_HOME = "/home";
     public static final String DOMAIN_WAREHOUSE = "/warehouse";
     public static final String DOMAIN_PROVIDER = "/provider";
