@@ -43,7 +43,6 @@ public class ProductServiceImpl implements ProductService {
                     .findAll(Specification.where(ProductSpecification.hasId(product.getId()))
                             .and(ProductSpecification.hasCode(product.getCode()))
                             .and(ProductSpecification.hasName(product.getName())));
-
             List<ProductDTO> productDTOs = productMapper.toProductDTOs(products);
 
             responseEntity = CommonUtils.buildResponse(HttpStatus.OK, HttpStatus.OK.name(), productDTOs);

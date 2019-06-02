@@ -19,5 +19,10 @@ public class Warehouse extends CommonEntity {
     @NotNull
     @Column(name = "NAME")
     private String name;
+    
+    @Override
+    public String toString() {
+        return this.getId() + ", " + this.name;
+    }
 
 }

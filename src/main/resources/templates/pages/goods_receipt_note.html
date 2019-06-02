@@ -103,10 +103,10 @@
                             <td style="font-size: 13px;">{{code}}</td>
                             <td style="width: 12rem;">{{name}}</td>
                             <td>
-                                <button type="button" class="btn btn-primary btn-sm"
-                                    id="add_skill_product">
+                                <button type="button" class="btn btn-primary btn-sm" 
+                                data-toggle="modal" data-target="#add_skill_product">
                                     <strong>
-                                    <i class="fa fa-plus-circle"></i>
+                                        <i class="fa fa-plus-circle"></i>
                                     </strong>
                                 </button>
                             </td>
@@ -119,6 +119,25 @@
                         <!-- {{/data}} -->
                     </tbody>
                 </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="add_skill_product">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h6 class="modal-title text-uppercase">
+                        <strong>chọn nhà kho và nhà cung cấp cho sản phẩm</strong>
+                    </h6>
+                    
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+          
+                <!-- Modal body -->
+                <div class="modal-body">
+                </div>
             </div>
         </div>
     </div>

@@ -59,7 +59,8 @@ function blockInsertGoodsReceiptNode() {
               let error = `<div class='alert alert-danger'>`;
               error += `<strong>Failure!</strong> The search skill is the failure!.<br>`;
               error += `<div class="text-danger">`;
-              error += e.message;
+              error = `<h4> Status error: ` + e.status + `</h4>`;
+              error += e.responseText;
               error += `</div></div>`;
 
               elInsert

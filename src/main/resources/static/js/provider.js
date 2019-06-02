@@ -33,8 +33,10 @@ $(document).ready(function() {
       },
       error: function(e) {
         $(`#loading`).html(``);
+        let error = `<h4> Status error: ` + e.status + `</h4>`;
+        error += e.responseText;
         $(`button[data-target='#add_provider']`).addClass(`d-none`);
-        $(`#error_get_all`).text(e.message);
+        $(`#error_get_all`).html(error);
       }
     });
   }
@@ -86,7 +88,8 @@ $(document).ready(function() {
           let error = `<div class='alert alert-danger'>`;
           error += `<strong>Thất bại!</strong> Thêm nhà cung cấp thất bại!.<br>`;
           error += `<div class="text-danger">`;
-          error += e.message;
+          error += `<h4> Status error: ` + e.status + `</h4>`;
+          error += e.responseText;
           error += `</div></div>`;
 
           elAdd
@@ -165,7 +168,8 @@ $(document).ready(function() {
             let error = `<div class='alert alert-danger'>`;
             error += `<strong>Thất bại!</strong> Lấy thông tin thất bại!.<br>`;
             error += `<div class='text-danger'>`;
-            error += e.message;
+            error += `<h4> Status error: ` + e.status + `</h4>`;
+            error += e.responseText;
             error += `</div></div>`;
 
             elEdit
@@ -239,7 +243,8 @@ $(document).ready(function() {
           let error = `<div class='alert alert-danger'>`;
           error += `<strong>Thất bại!</strong> Thêm nhà cung cấp thất bại!.<br>`;
           error += `<div class="text-danger">`;
-          error += e.message;
+          error += `<h4> Status error: ` + e.status + `</h4>`;
+          error += e.responseText;
           error += `</div></div>`;
 
           elEdit
@@ -319,7 +324,8 @@ $(document).ready(function() {
           let error = `<div class='alert alert-danger'>`;
           error += `<strong>Thất bại!</strong> Xóa nhà cung cấp thất bại!.<br>`;
           error += `<div class="text-danger">`;
-          error += e.message;
+          error += `<h4> Status error: ` + e.status + `</h4>`;
+          error += e.responseText;
           error += `</div></div>`;
 
           elDel
