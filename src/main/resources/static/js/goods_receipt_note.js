@@ -86,7 +86,7 @@ function blockInsertGoodsReceiptNode() {
 function blockSearchInsertGoodsReceiptNode() {
   let searchInsert = $(`#add_skill_product`);
   searchInsert.find(`#search_warehouse_btn`).keypress(function(e) {
-    console.log("hello hello");
+    //console.log("hello hello");
     searchInsert
       .find(`#danger_search_insert`)
       .removeClass(`d-block`)
@@ -97,10 +97,10 @@ function blockSearchInsertGoodsReceiptNode() {
     let elLiveSearch = searchInsert.find(`#live_search`);
 
     if (keycode == `13`) {
-      let elSearch = elInsert.find(`#search_warehouse_btn`);
+      let elSearch = searchInsert.find(`#search_warehouse_btn`);
       let warehouse = elSearch.val();
 
-      alert("hello: ", keycode);
+      //alert("hello: ", keycode);
 
       $.ajax({
         type: `POST`,
