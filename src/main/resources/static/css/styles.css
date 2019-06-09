@@ -72,6 +72,17 @@ thead .td_12 {
   z-index: 1060;
 }
 
+#live_search table tbody tr.choice {
+  background-color: #eee;
+}
+
+#live_search_next {
+  position: absolute;
+  top: 1.75rem;
+  left: 2rem;
+  z-index: 1060;
+}
+
 #insert_goods_receipt_note .modal-dialog {
   max-width: 400px;
 }

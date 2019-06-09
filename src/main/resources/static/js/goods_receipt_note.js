@@ -1,6 +1,17 @@
+let listProductFilters = [];
+let listProductChoice = null;
+let listProductChoices = [];
+let isSearchWarehouse = false;
+let isSearchProvider = false;
+let btnAddProduct = null;
+let listWarehouse = [];
+let btnAddNext = null;
+let next = -1;
+
 $(document).ready(function() {
   $(function() {
     blockInsertGoodsReceiptNode();
+    addProductInsertGoodsReceiptNode();
     blockSearchInsertGoodsReceiptNode();
     insertGoodsReceiptNode();
   });
@@ -42,7 +53,8 @@ function blockInsertGoodsReceiptNode() {
               elLiveSearch.html(LOAD_WAITING);
             },
             success: function(res) {
-              console.log(res);
+              listProductFilters = res.data;
+              listProductChoice = null;
               elLiveSearch.html("");
               elLiveSearch.html(
                 Mustache.to_html($(`#tplSearchProducts`).html(), res)
@@ -83,10 +95,31 @@ function blockInsertGoodsReceiptNode() {
   });
 }
 
+function addProductInsertGoodsReceiptNode() {
+  let elInsert = $(`#live_search`);
+  elInsert.on(`click`, `button[data-target='#add_skill_product']`, function(e) {
+    let id = $(this)
+      .closest(`tbody tr`)
+      .attr(`row_id`);
+
+    for (var i = 0; i < listProductFilters.length; i++) {
+      if (listProductFilters[i].id == id) {
+        listProductChoice = listProductFilters[i];
+        break;
+      }
+    }
+
+    $(this)
+      .closest(`tbody tr`)
+      .addClass(`choice`);
+    $(this).addClass(`d-none`);
+    btnAddProduct = $(this);
+  });
+}
+
 function blockSearchInsertGoodsReceiptNode() {
   let searchInsert = $(`#add_skill_product`);
   searchInsert.find(`#search_warehouse_btn`).keypress(function(e) {
-    //console.log("hello hello");
     searchInsert
       .find(`#danger_search_insert`)
       .removeClass(`d-block`)
@@ -94,13 +127,14 @@ function blockSearchInsertGoodsReceiptNode() {
       .html(``);
 
     let keycode = e.keyCode ? e.keyCode : e.which;
-    let elLiveSearch = searchInsert.find(`#live_search`);
+    let elLiveSearch = searchInsert.find(`#live_search_next`);
 
     if (keycode == `13`) {
+      isSearchWarehouse = true;
+      isSearchProvider = false;
+      next = -1;
       let elSearch = searchInsert.find(`#search_warehouse_btn`);
       let warehouse = elSearch.val();
-
-      //alert("hello: ", keycode);
 
       $.ajax({
         type: `POST`,
@@ -114,11 +148,9 @@ function blockSearchInsertGoodsReceiptNode() {
           elLiveSearch.html(LOAD_WAITING);
         },
         success: function(res) {
-          console.log(res);
+          listWarehouse = res.data;
           elLiveSearch.html("");
-          // elLiveSearch.html(
-          //   Mustache.to_html($(`#tplSearchProducts`).html(), res)
-          // );
+          elLiveSearch.html(Mustache.to_html($(`#tplSearchNexts`).html(), res));
 
           searchInsert
             .find(`#danger_search_insert`)
@@ -130,7 +162,7 @@ function blockSearchInsertGoodsReceiptNode() {
         error: function(e) {
           elLiveSearch.html("");
           let error = `<div class='alert alert-danger'>`;
-          error += `<strong>Failure!</strong> The search skill is the failure!.<br>`;
+          error += `<strong>Failure!</strong> The search warehouse is the failure!.<br>`;
           error += `<div class="text-danger">`;
           error = `<h4> Status error: ` + e.status + `</h4>`;
           error += e.responseText;
@@ -150,6 +182,59 @@ function blockSearchInsertGoodsReceiptNode() {
     }
 
     e.stopPropagation();
+  });
+
+  searchInsert
+    .find("#live_search_next")
+    .on(`click`, `button[id='add_search_next']`, function(e) {
+      if (next >= 0) {
+        btnAddNext = $(this);
+      }
+      next += 1;
+
+      $(this)
+        .closest(`button`)
+        .attr("disabled", true);
+
+      let id = $(this)
+        .closest(`tbody tr`)
+        .attr(`row_id`);
+
+      if (isSearchWarehouse == true && isSearchProvider == false) {
+        let warehouse = null;
+        for (var i = 0; i < listWarehouse.length; i++) {
+          if (listWarehouse[i].id == id) {
+            warehouse = listWarehouse[i];
+            break;
+          }
+        }
+        listProductChoice.warehouse = { id: id };
+
+        if (btnAddNext != null && next > 0) {
+          btnAddNext.attr("disabled", false);
+        }
+
+        searchInsert.find("#show_warehouse_choose").html(``);
+        searchInsert
+          .find("#show_warehouse_choose")
+          .html(
+            Mustache.to_html($(`#tplResultChooseWarehouse`).html(), warehouse)
+          );
+      }
+
+      if (isSearchWarehouse == false && isSearchProvider == true) {
+        listProductChoice.provider = { id: id };
+      }
+    });
+
+  $("#add_skill_product").on("hide.bs.modal", function(e) {
+    if (
+      listProductChoice.provider == null ||
+      listProductChoice.warehouse == null
+    ) {
+      btnAddProduct.removeClass(`d-none`);
+      btnAddProduct.closest(`tbody tr`).removeClass(`choice`);
+    }
   });
 }
 
