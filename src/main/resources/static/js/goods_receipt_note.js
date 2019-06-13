@@ -5,8 +5,6 @@ let isSearchWarehouse = false;
 let isSearchProvider = false;
 let btnAddProduct = null;
 let listWarehouse = [];
-let btnAddNext = null;
-let next = -1;
 
 $(document).ready(function() {
   $(function() {
@@ -187,11 +185,6 @@ function blockSearchInsertGoodsReceiptNode() {
   searchInsert
     .find("#live_search_next")
     .on(`click`, `button[id='add_search_next']`, function(e) {
-      if (next >= 0) {
-        btnAddNext = $(this);
-      }
-      next += 1;
-
       $(this)
         .closest(`button`)
         .attr("disabled", true);
@@ -208,11 +201,14 @@ function blockSearchInsertGoodsReceiptNode() {
             break;
           }
         }
-        listProductChoice.warehouse = { id: id };
 
-        if (btnAddNext != null && next > 0) {
-          btnAddNext.attr("disabled", false);
+        if (listProductChoice.warehouse != null) {
+          let idOld = listProductChoice.warehouse.id;
+          searchInsert
+            .find(`#live_search_next tbody tr[row_id=` + idOld + `] button`)
+            .attr("disabled", false);
         }
+        listProductChoice.warehouse = { id: id };
 
         searchInsert.find("#show_warehouse_choose").html(``);
         searchInsert
